@@ -24,13 +24,27 @@ i.ph,
   @include core.keep-with-next;
 }
 
-// break-after is ignored inside flex containers by most print/PDF engines, so
+// break-after/break-inside are ignored inside flex containers by most print/PDF engines, so
 // .doc-field must lay out as a block for .doc-field__label's keep-with-next to work
 .doc-field {
   display: block;
 
   > * + * {
     margin-top: 4px;
+  }
+}
+
+// same flex-fragmentation issue as .doc-field above; float the icon so the header
+// still renders instead of being dropped by the PDF engine
+.doc-section-header {
+  display: block;
+
+  > .doc-icon-badge {
+    float: left;
+  }
+
+  &__text {
+    overflow: hidden;
   }
 }
 
