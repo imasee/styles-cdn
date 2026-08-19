@@ -1,0 +1,28 @@
+@use "../abstracts" as abs;
+
+$_class_prefix: abs.$prefix;
+
+$text-utilities: (
+  secondary: abs.get-color("text-secondary"),
+  primary: abs.get-color("brand-primary"),
+  inverse: abs.get-color("text-inverse")  
+);
+
+$bg-utilities: (
+  primary: abs.get-color("brand-primary"),
+  secondary: abs.get-color("brand-secondary"),
+  fill-dark: abs.get-color("fill-dark"),
+  fill-mid: abs.get-color("fill-mid"),
+);
+
+@each $name, $color in $text-utilities {
+  .text-#{$name} {
+    color: $color !important;
+  }
+}
+
+@each $name, $color in $bg-utilities {
+  .bg-#{$name} {
+    background-color: $color !important;
+  }
+}

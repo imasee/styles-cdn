@@ -1,0 +1,40 @@
+@use 'core';
+
+// Viewport width — EO.Pdf scales this down to fit the physical page size.
+// Increase to zoom out, decrease to zoom in.
+html {
+    width: 1200px;
+}
+
+// Box model reset for all page-level containers
+.doc-file-page,
+.doc-file-cover {
+    &,
+    * {
+        box-sizing: border-box;
+    }
+}
+
+// Cover page: full bleed, no internal padding
+.doc-file-cover {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    padding: 0;
+    @include core.no-break-inside;
+    break-before: auto;
+}
+
+@media print {
+    // Footer element is extracted server-side — hide it from the HTML flow
+    [data-pdf-document-footer] {
+        display: none;
+    }
+
+    // Content pages: side padding matches C# page margin (36px = 0.375in)
+    .doc-item-container {
+        max-width: unset;
+        padding-left: 0.375in;
+        padding-right: 0.375in;
+    }
+}

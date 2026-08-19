@@ -1,0 +1,52 @@
+@use "sass:map";
+
+$light: #ffffff;
+$dark: #000000;
+
+// Brand Colors
+$color-brand-primary: #363636;
+$color-brand-secondary: #f7f7f7;
+$color-brand-tertiary: #525252;
+$color-brand-ancillary: #dedede;
+
+// Fill / Surface Colors
+$color-fill-dark: #282828;
+$color-fill-mid: #e2e2e2;
+$color-fill-light: #f9f9f9;
+
+// Stroke & UI Elements
+$color-stroke-primary: #cfcfcf;
+$color-text-secondary: #707070;
+
+// Contrast Colors
+$light-text: #f7f7f7;
+$dark-text: #363636;
+
+$colors: (
+  // BRAND SET
+  "brand-primary": $color-brand-primary,
+  "brand-secondary": $color-brand-secondary,
+  "brand-tertiary": $color-brand-tertiary,
+  "brand-ancillary": $color-brand-ancillary,
+
+  // SURFACE SET
+  "fill-dark": $color-fill-dark,
+  "fill-mid": $color-fill-mid,
+  "fill-light": $color-fill-light,
+  "fill-ancillary": $color-brand-primary,
+
+  // SEMANTIC SURFACES (Explicitly defined)
+  "app-background": $light,
+
+  // STROKE & TEXT
+  "stroke-primary": $color-stroke-primary,
+  "text-primary": $dark-text,
+  "text-secondary": $color-text-secondary,
+  "text-inverse": $light-text,
+  "link-primary": $color-text-secondary,
+  "link-inverse": $light-text,
+
+  // Light & Dark
+  "light": $light,
+  "dark": $dark
+);

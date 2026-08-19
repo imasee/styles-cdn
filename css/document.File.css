@@ -1,0 +1,14 @@
+@page {
+  size: letter; /* Sets the paper size */
+  margin: .25in 0mm;
+  /*margin: 10mm;*/ /* Defines page margins */
+}
+@media print {
+  .full-page {
+    width: 100vw;
+    height: 100vh;
+    page-break-after: always; /* Ensures content fits within one page */
+  }
+}
+
+/*# sourceMappingURL=document.File.css.map */

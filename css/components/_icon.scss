@@ -1,0 +1,47 @@
+// Icons
+[class^="ph-"],
+[class*=" ph-"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--doc-icon-box-size, var(--doc-icon-size, 20px));
+    height: var(--doc-icon-box-size, var(--doc-icon-size, 20px));
+    font-size: var(--doc-icon-size, 20px);
+    vertical-align: -0.125em;
+    line-height: 1;
+    flex-shrink: 0;
+    color: var(--doc-icon-color, inherit);
+}
+
+.ph {
+    &-s12 {
+        --doc-icon-size: 12px;
+    }
+
+    &-s16 {
+        --doc-icon-size: 16px;
+    }
+
+    &-s20{
+        --doc-icon-size: 20px;
+    }
+
+    &-s28 {
+        --doc-icon-size: 28px;
+    }
+}
+
+// Review stars
+.doc-review-stars {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: auto;
+    flex: 0 0 auto;
+    gap: 4px;
+
+    &>i {
+        --doc-icon-size: 16px;
+        flex-shrink: 0;
+    }
+}

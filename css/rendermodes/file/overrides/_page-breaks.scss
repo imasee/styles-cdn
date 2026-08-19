@@ -1,0 +1,29 @@
+@use '../core';
+
+.doc-avatar,
+.doc-badge,
+.doc-badge-pill,
+.doc-chip,
+.doc-chips,
+.doc-divider,
+.doc-icon-badge,
+.doc-image,
+.doc-line-items__item,
+.doc-link,
+.doc-link-group,
+.doc-section-header,
+.svc-image-grid,
+i.ph,
+.doc-timeline__header {
+  @include core.no-break-inside;
+}
+
+.doc-panel__header,
+.doc-timeline__header,
+.doc-field__label {
+  @include core.keep-with-next;
+}
+
+.doc-card__body .doc-field__label {
+  @include core.allow-breaks;
+}

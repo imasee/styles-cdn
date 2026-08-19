@@ -1,0 +1,153 @@
+@use "sass:map";
+@use "sass:list";
+@use "sass:meta";
+@use "sass:string";
+@use "settings";
+@use "../../abstracts/breakpoints" as bp;
+
+// Utility generator
+@mixin generate-utility($utility, $infix: "") {
+    $values: map.get($utility, values);
+
+    // If $values is a single string or the first item isn't a list, zip it with itself
+    @if meta.type-of($values)=="string"
+
+    or meta.type-of(list.nth($values, 1)) !="list" {
+        $values: list.zip($values, $values);
+    }
+
+    @each $key,
+    $value in $values {
+        $properties: map.get($utility, property);
+
+        // Normalize a single property into a list
+        @if meta.type-of($properties)=="string" {
+            $properties: list.append((), $properties);
+        }
+
+        // Determine the class prefix
+        $property-class: list.nth($properties, 1);
+        @if map.has-key($utility, class) {
+            $property-class: map.get($utility, class);
+        }
+        @if $property-class == null {
+            $property-class: "";
+        }
+
+        // CSS variable name & state pseudos
+        $css-variable-name: map.get($utility, class);
+        @if map.has-key($utility, css-variable-name) {
+            $css-variable-name: map.get($utility, css-variable-name);
+        }
+        $state: ();
+        @if map.has-key($utility, state) {
+            $state: map.get($utility, state);
+        }
+
+        // Adjust infix when it's just a leading dash
+        @if $property-class == "" and string.slice($infix, 1, 1) == "-" {
+            $infix: string.slice($infix, 2);
+        }
+
+        // Modifier (e.g. "-sm", "-lg")
+        $property-class-modifier: "";
+        @if $key != null {
+            @if $property-class == "" and $infix == "" {
+                $property-class-modifier: "";
+            } @else {
+                $property-class-modifier: "-#{$key}";
+            }
+        }
+
+        $is-css-var: map.get($utility, css-var);
+        $is-local-vars: map.get($utility, local-vars);
+        $is-rtl: map.get($utility, rtl);
+
+        @if $value !=null {
+            @if $is-css-var {
+                .#{$property-class}#{$infix}#{$property-class-modifier} {
+                    --#{settings.$prefix}#{$css-variable-name}: #{$value};
+                }
+
+                @each $pseudo in $state {
+                    .#{$property-class}#{$infix}#{$property-class-modifier}-#{$pseudo}:#{$pseudo} {
+                        --#{settings.$prefix}#{$css-variable-name}: #{$value};
+                    }
+                }
+            }
+
+            @else {
+                .#{$property-class}#{$infix}#{$property-class-modifier} {
+                    @each $prop in $properties {
+                        @if $is-local-vars {
+
+                            @each $local-var,
+                            $variable in $is-local-vars {
+                                --#{settings.$prefix}#{$local-var}: #{$variable};
+                            }
+                        }
+
+                        @if settings.$enable-important-utilities {
+                            #{$prop}: $value !important;
+                        } @else {
+                            #{$prop}: $value;
+                        }
+                    }
+                }
+
+                @each $pseudo in $state {
+                    .#{$property-class}#{$infix}#{$property-class-modifier}-#{$pseudo}:#{$pseudo} {
+                        @each $prop in $properties {
+                            @if $is-local-vars {
+
+                                @each $local-var,
+                                $variable in $is-local-vars {
+                                    --#{settings.$prefix}#{$local-var}: #{$variable};
+                                }
+                            }
+
+                            @if settings.$enable-important-utilities {
+                                #{$prop}: $value !important;
+                            } @else {
+                                #{$prop}: $value;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@if settings.$generate-utility-classes {
+
+  // Loop over each breakpoint
+  @each $breakpoint in map.keys(settings.$utilities-breakpoints) {
+
+    // Generate media query if needed
+    @include bp.respond-above($breakpoint, settings.$grid-breakpoints) {
+      $infix: bp.breakpoint-infix($breakpoint, settings.$grid-breakpoints);
+
+      // Loop over each utility property
+      @each $key, $utility in settings.$utilities {
+        // The utility can be disabled with `false`, thus check if the utility is a map first
+        // Only proceed if responsive media queries are enabled or if it's the base media query
+        @if meta.type-of($utility) == "map" and (map.get($utility, responsive) or $infix == "") {
+          @include generate-utility($utility, $infix);
+        }
+      }
+    }
+  }
+
+  // Print utilities
+  @media print {
+    @each $key, $utility in settings.$utilities {
+      // The utility can be disabled with `false`, thus check if the utility is a map first
+      // Then check if the utility needs print styles
+      @if meta.type-of($utility) == "map" and map.get($utility, print) == true {
+        @include generate-utility($utility, "-print");
+      }
+    }
+  }
+}

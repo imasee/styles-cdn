@@ -1,0 +1,52 @@
+@use "../abstracts" as abs;
+
+.doc-leader-row {
+  --doc-leader-row-separator-color: #{abs.get-color("stroke-primary")};
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+
+  & > * {
+    display: inline-flex;
+  }
+
+  &__label {
+    flex-shrink: 0;
+    color: inherit;
+  }
+
+  &__amount {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  &__separator {
+    content: "";
+    display: block;
+    flex: 1;
+    height: 1px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed transparent;
+    background-image: linear-gradient(
+      to right,
+      var(--doc-leader-row-separator-color) 0px,
+      var(--doc-leader-row-separator-color) var(--doc-leader-row-separator-dash, 4px),
+      transparent var(--doc-leader-row-separator-dash, 4px),
+      transparent var(--doc-leader-row-separator-gap, 6px)
+    );
+    background-size: var(--doc-leader-row-separator-gap, 6px) 1px;
+    background-position: bottom;
+    background-repeat: repeat-x;
+  }
+
+  &--separator-primary {
+    --doc-leader-row-separator-color: #{abs.get-color("brand-primary")};
+    --doc-leader-row-separator-dash: 5px;
+    --doc-leader-row-separator-gap: 8px;
+  }
+}

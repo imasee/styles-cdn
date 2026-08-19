@@ -1,0 +1,56 @@
+@use "../abstracts" as abs;
+
+.doc-section-header {
+  --doc-icon-badge-ctx-bg: #{abs.get-color("fill-ancillary")};
+  --doc-icon-badge-ctx-fg: #{abs.get-color("text-inverse")};
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  color: var(--doc-section-header-fg, inherit);
+  margin-bottom: 20px;
+
+  &__text {
+    flex: 1;
+    width: 100%;
+  }
+  &__overline {
+    display: inline-block;
+    @include abs.typography("text-body-1");
+    margin-bottom: 4px;
+  }
+
+  &__heading {
+    @include abs.typography("display-headline-1");
+    text-transform: uppercase;
+  }
+
+  &__icon,
+  & > .doc-icon-badge {
+    display: none;
+  }
+
+  &--inverse {
+    --doc-section-header-fg: #{abs.get-color("text-inverse")};
+    --doc-icon-badge-ctx-bg: var(--doc-section-header-fg);
+    --doc-icon-badge-ctx-fg: #{abs.get-color("brand-primary")};
+  }
+
+  & > .doc-icon-badge {
+    margin: 3px 16px auto 0;
+  }
+}
+
+.doc-collapsible-trigger.doc-collapsible--initialized:not(.is-open) > .doc-section-header {
+    margin-bottom: 0;
+}
+
+@include abs.respond-above("sm") {
+  .doc-section-header {
+    &__icon,
+    & > .doc-icon-badge {
+      display: inline-flex;
+    }
+  }
+}
+

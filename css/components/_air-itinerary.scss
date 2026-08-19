@@ -1,0 +1,222 @@
+@use "../abstracts" as abs;
+
+.doc-flight-itinerary {
+  --doc-flight-itinerary-secondary-fg: #{abs.get-color("text-secondary")};
+  --doc-flight-itinerary-stroke: #{abs.get-color("stroke-primary")};
+
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  // Shared Flex Alignments
+  &__header {
+    display: flex;
+    align-items: center;
+  }
+
+  &__header {
+    gap: 12px;
+  }
+
+  &__body {
+    margin-top: 16px;
+  }
+
+  &__route {
+    display: none;
+    align-items: center;
+    justify-content: flex-start;
+    text-transform: uppercase;
+    gap: 8px;
+  }
+
+  &__port {
+    @include abs.typography("text-body-1");
+      font-weight: 700;
+  }
+
+  &__stop {
+    @include abs.typography("text-body-2");
+    font-weight: 700;
+  }
+
+  // Shared Color: Secondary Foreground
+  &__stop,
+  &__route-icon {
+    color: var(--doc-flight-itinerary-secondary-fg);
+  }
+
+  &__route-icon {
+    display: inline-flex;
+    align-items: center;
+    width: 16px;
+    height: 16px;
+
+    i {
+      font-size: 16px;
+      width: inherit;
+      height: inherit;
+    }
+  }
+
+  &__layover {
+    display: flex;
+    justify-content: center;
+    padding: 12px 0;
+    &-pill {
+      width: 100%;
+      flex: 1;
+      white-space: wrap;
+    }
+  }
+}
+
+.doc-flight-segment {
+  --doc-flight-segment-bg: var(--doc-card-bg, #{abs.get-color("fill-light")});
+  background-color: var(--doc-flight-segment-bg);
+  width: 100%;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  // Shared Flex Layouts (Vertical alignment)
+  &__meta,
+  &__duration,
+  &__detail,
+  &__nodes,
+  &__connector {
+    display: flex;
+    align-items: center;
+  }
+
+  // Shared Color: Secondary Foreground
+  &__label,
+  &__city {
+    color: var(--doc-flight-itinerary-secondary-fg);
+  }
+
+  &__meta {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  &__meta-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    gap: 4px 12px;
+  }
+
+  &__duration {
+    flex-shrink: 0;
+    i {
+      margin-right: 4px;
+    }
+  }
+
+  &__detail {
+    @include abs.typography("text-body-2");
+
+  }
+
+  &__label {
+    margin-right: 4px;
+  }
+
+  &__value {
+    font-weight: 700;
+  }
+
+  &__nodes {
+    flex-wrap: nowrap;
+    gap: 12px;
+    & > * {
+      flex: 1;
+    }
+  }
+
+  &__node {
+    flex: 0 1 auto;
+    text-align: center;
+  }
+
+  &__time {
+    @include abs.typography("display-headline-2");
+    white-space: nowrap;
+    font-weight: 700;
+  }
+
+  &__station {
+    @include abs.typography("text-body-2");
+    letter-spacing: 0.13px;
+    font-weight: 700;
+    white-space: wrap;
+  }
+
+  &__city {
+    margin-top: 4px;
+    @include abs.typography("text-body-3");
+  }
+
+  &__connector {
+    justify-content: center;
+    height: auto;
+    position: relative;
+    background-color: var(--doc-flight-segment-bg);
+    i {
+      position: relative;
+      z-index: 2;
+      display: inline-flex;
+      width: 44px;
+      height: 20px;
+      font-size: 20px;
+      padding: 0 12px;
+      background-color: inherit;
+    }
+
+    &::before {
+      z-index: 1;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 0;
+      width: 100%;
+      height: 1px;
+      content: "";
+      border-top: 2px solid transparent; // Logic handled by border-image
+      border-image: repeating-linear-gradient(to right, #ccc, #ccc 6px, transparent 6px, transparent 9px) 1;
+    }
+  }
+
+  &__specs {
+    border-top: 1px solid var(--doc-flight-itinerary-stroke);
+    padding-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px 40px;
+  }
+}
+
+@include abs.respond-above("sm") {
+  .doc-flight-itinerary {
+    &__route {
+      display: flex;
+    }
+
+    &__layover-pill {
+      width: auto;
+      flex: 0 0 auto;
+    }
+  }
+}
+
+@include abs.respond-above("lg") {
+  .doc-flight-segment__meta-inner {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+}

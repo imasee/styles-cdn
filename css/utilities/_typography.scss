@@ -1,0 +1,103 @@
+@use "../abstracts" as abs;
+
+$_class_prefix: abs.$prefix;
+
+// DISPLAY SET - decorative headlines, all caps usage
+.#{$_class_prefix}-display {
+  @include abs.typography("display");
+}
+.#{$_class_prefix}-display-headline-1 {
+  @include abs.typography("display-headline-1");
+}
+
+.#{$_class_prefix}-display-headline-2 {
+  @include abs.typography("display-headline-2");
+}
+
+.#{$_class_prefix}-display-body-1 {
+  @include abs.typography("display-body-1");
+}
+.#{$_class_prefix}-display-body-2 {
+  @include abs.typography("display-body-2");
+}
+.#{$_class_prefix}-display-body-3 {
+  @include abs.typography("display-body-3");
+}
+
+// TEXT SET - readable content, normal case
+[class^="#{$_class_prefix}-text-"],
+[class*=" #{$_class_prefix}-text-"] {
+  text-transform: initial;
+  &::first-letter {
+    text-transform: uppercase;
+  }
+}
+
+.#{$_class_prefix}-text-headline-1 {
+  @include abs.typography("text-headline-1");
+}
+.#{$_class_prefix}-text-body-1 {
+  @include abs.typography("text-body-1");
+}
+.#{$_class_prefix}-text-body-2 {
+  @include abs.typography("text-body-2");
+}
+.#{$_class_prefix}-text-body-3 {
+  @include abs.typography("text-body-3");
+}
+
+// TITLE SET - softer decorative, title case usage
+.#{$_class_prefix}-title-headline-1 {
+  @include abs.typography("title-headline-1");
+}
+.#{$_class_prefix}-title-body-1 {
+  @include abs.typography("title-body-1");
+}
+
+// Font weight modifiers
+// Setting --doc-fw propagates into any type-scale font shorthand token
+// on the element or its descendants via var(--doc-fw, <scale-fallback>).
+.#{$_class_prefix}-fw-regular {
+  font-weight: 400 !important;
+}
+.#{$_class_prefix}-fw-book {
+  font-weight: 450 !important;
+}
+.#{$_class_prefix}-fw-medium {
+  font-weight: 500 !important;
+}
+.#{$_class_prefix}-fw-bold {
+  font-weight: 700 !important;
+}
+
+// Font family modifiers
+.#{$_class_prefix}-font-display {
+  font-family: var(--#{$_class_prefix}-font-display) !important;
+}
+.#{$_class_prefix}-font-body {
+  font-family: var(--#{$_class_prefix}-font-body) !important;
+}
+
+// Text transform modifiers
+.#{$_class_prefix}-uppercase {
+  text-transform: uppercase !important;
+}
+.#{$_class_prefix}-lowercase {
+  text-transform: lowercase !important;
+}
+.#{$_class_prefix}-capitalize {
+  text-transform: capitalize !important;
+}
+
+.#{$_class_prefix}-normal-case {
+  text-transform: none !important;
+}
+
+.#{$_class_prefix}-sentence-case {
+  display: inline-block !important;
+  text-transform: lowercase !important;
+
+  &::first-letter {
+    text-transform: uppercase !important;
+  }
+}

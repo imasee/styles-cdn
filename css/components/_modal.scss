@@ -1,0 +1,188 @@
+@use "../abstracts" as abs;
+
+// Overlay/Backdrop
+.doc-modal__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  background-color: var(--doc-backdrop-bg, #{abs.get-color("fill-dark")});
+  opacity: var(--doc-overlay-opacity, 0.3);
+  transition: opacity 0.3s ease;
+}
+
+// Modal Container
+.doc-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1060;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  outline: 0;
+  pointer-events: none;
+
+  &__dialog {
+    position: relative;
+    width: var(--doc-dialog-w, auto);
+    height: auto;
+    min-width: 0;
+    min-height: var(--doc-dialog-minh, 0);
+    max-width: var(--doc-dialog-maxw, 864px);
+    max-height: var(--doc-dialog-maxh, 80vh);
+    margin: var(--doc-modal-margin, auto);
+    pointer-events: none;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0.98) translateY(15px);
+    opacity: 0;
+
+    .doc-modal.is-active & {
+      transform: scale(1) translateY(0);
+      transition:
+        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.3s ease;
+      opacity: 1;
+    }
+  }
+
+  // Content Container
+  &__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    flex: 1;
+    overflow: hidden;
+    overflow-y: auto;
+    color: var(--doc-modal-color, inherit);
+    pointer-events: auto;
+    background-color: var(--doc-modal-bg, #{abs.get-color("fill-light")});
+    background-clip: padding-box;
+    border-radius: var(--doc-modal-shape, 12px);
+    box-shadow:
+      0 4px 6px -1px rgba(9, 10, 11, 0.1),
+      0 2px 4px -2px rgba(9, 10, 11, 0.1);
+    outline: 0;
+  }
+
+  // Header
+  &__header {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    padding: 32px 32px 16px;
+  }
+
+  &__title {
+    margin: 0;
+    line-height: 1.5;
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+
+  &__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    line-height: 1;
+    margin-left: 8px;
+  }
+
+  &__body {
+    position: relative;
+    flex: 1;
+    padding: 8px 32px 16px;
+    overflow: hidden;
+    overflow-y: auto;
+
+    &:last-child {
+      padding-bottom: 32px;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 16px 32px 32px;
+  }
+
+  &.is-active {
+    visibility: visible;
+    opacity: 1;
+
+    .doc-modal__content {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+  }
+}
+
+// — Below sm
+@include abs.respond-below("sm") {
+  .doc-modal {
+    --doc-modal-shape: 0;
+    --doc-dialog-maxw: 100vw;
+    --doc-dialog-maxh: none;
+
+    &__dialog {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+    }
+
+    &__content {
+      border-radius: 0;
+    }
+  }
+}
+
+// — sm → md: Fixed 598px, centered
+@include abs.respond-between("sm", "md") {
+  .doc-modal {
+    --doc-dialog-maxw: 598px;
+    --doc-dialog-w: 598px;
+    --doc-dialog-maxh: 80vh;
+  }
+}
+
+@include abs.respond-between("md", "lg") {
+  .doc-modal {
+    --doc-dialog-maxw: 745px;
+    --doc-dialog-w: 745px;
+    --doc-dialog-maxh: 80vh;
+  }
+}
+
+@include abs.respond-above("lg") {
+  .doc-modal {
+    --doc-dialog-maxw: 864px;
+    --doc-dialog-w: 100%;
+    --doc-dialog-maxh: 80vh;
+  }
+}
+
+// Size Variants (override dialog max-width per modifier)
+.doc-modal--sm .doc-modal__dialog {
+  --doc-dialog-maxw: 400px;
+}
+.doc-modal--lg .doc-modal__dialog {
+  --doc-dialog-maxw: 800px;
+}
+.doc-modal--xl .doc-modal__dialog {
+  --doc-dialog-maxw: 1140px;
+}

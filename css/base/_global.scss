@@ -1,0 +1,11 @@
+@use "../abstracts/" as abs;
+
+body {
+    background-color: abs.get-color("app-background");
+    color: abs.get-color("text-primary");
+    @include abs.typography("text-body-1");
+}
+
+body.no-scroll {
+    overflow: hidden;
+}

@@ -1,0 +1,36 @@
+$font-path: 'https://assets.travel-media.co/raw/upload/v1759961869/adx/Client-Itinerary/fonts/sangbleu/';
+$font-style: normal;
+
+@mixin font-face($family, $weight, $style, $woff2, $woff) {
+    @font-face {
+        font-family: $family;
+        src: url($woff2) format('woff2'),
+            url($woff) format('woff');
+        font-weight: $weight;
+        font-style: $style;
+    }
+}
+
+// SangBleuSunrise fonts
+@include font-face('SangBleuSunrise', 100, $font-style, "#{$font-path}SangBleuSunrise-Air-WebS.woff2", "#{$font-path}SangBleuSunrise-Air-WebS.woff");
+@include font-face('SangBleuSunrise', 100, $font-style, "#{$font-path}SangBleuSunrise-Air-WebXL.woff2", "#{$font-path}SangBleuSunrise-Air-WebXL.woff");
+@include font-face('SangBleuSunrise', 300, $font-style, "#{$font-path}SangBleuSunrise-Light-WebS.woff2", "#{$font-path}SangBleuSunrise-Light-WebS.woff");
+@include font-face('SangBleuSunrise', 300, $font-style, "#{$font-path}SangBleuSunrise-Light-WebXL.woff2", "#{$font-path}SangBleuSunrise-Light-WebXL.woff");
+@include font-face('SangBleuSunrise', 400, $font-style, "#{$font-path}SangBleuSunrise-Regular-WebS.woff2", "#{$font-path}SangBleuSunrise-Regular-WebS.woff");
+@include font-face('SangBleuSunrise', 400, $font-style, "#{$font-path}SangBleuSunrise-Regular-WebXL.woff2", "#{$font-path}SangBleuSunrise-Regular-WebXL.woff");
+@include font-face('SangBleuSunrise', 450, $font-style, "#{$font-path}SangBleuSunrise-Livre-WebS.woff2", "#{$font-path}SangBleuSunrise-Livre-WebS.woff");
+@include font-face('SangBleuSunrise', 450, $font-style, "#{$font-path}SangBleuSunrise-Livre-WebXL.woff2", "#{$font-path}SangBleuSunrise-Livre-WebXL.woff");
+@include font-face('SangBleuSunrise', 500, $font-style, "#{$font-path}SangBleuSunrise-Medium-WebS.woff2", "#{$font-path}SangBleuSunrise-Medium-WebS.woff");
+@include font-face('SangBleuSunrise', 500, $font-style, "#{$font-path}SangBleuSunrise-Medium-WebXL.woff2", "#{$font-path}SangBleuSunrise-Medium-WebXL.woff");
+@include font-face('SangBleuSunrise', 700, $font-style, "#{$font-path}SangBleuSunrise-Bold-WebS.woff2", "#{$font-path}SangBleuSunrise-Bold-WebS.woff");
+@include font-face('SangBleuSunrise', 700, $font-style, "#{$font-path}SangBleuSunrise-Bold-WebXL.woff2", "#{$font-path}SangBleuSunrise-Bold-WebXL.woff");
+
+// SangBleuRepublic fonts
+@include font-face('SangBleuRepublic', 450, $font-style, "#{$font-path}SangBleuRepublic-Book-WebS.woff2", "#{$font-path}SangBleuRepublic-Book-WebS.woff");
+@include font-face('SangBleuRepublic', 450, $font-style, "#{$font-path}SangBleuRepublic-Book-WebXL.woff2", "#{$font-path}SangBleuRepublic-Book-WebXL.woff");
+@include font-face('SangBleuRepublic', 400, $font-style, "#{$font-path}SangBleuRepublic-Regular-WebS.woff2", "#{$font-path}SangBleuRepublic-Regular-WebS.woff");
+@include font-face('SangBleuRepublic', 400, $font-style, "#{$font-path}SangBleuRepublic-Regular-WebXL.woff2", "#{$font-path}SangBleuRepublic-Regular-WebXL.woff");
+@include font-face('SangBleuRepublic', 500, $font-style, "#{$font-path}SangBleuRepublic-Medium-WebS.woff2", "#{$font-path}SangBleuRepublic-Medium-WebS.woff");
+@include font-face('SangBleuRepublic', 500, $font-style, "#{$font-path}SangBleuRepublic-Medium-WebXL.woff2", "#{$font-path}SangBleuRepublic-Medium-WebXL.woff");
+@include font-face('SangBleuRepublic', 700, $font-style, "#{$font-path}SangBleuRepublic-Bold-WebS.woff2", "#{$font-path}SangBleuRepublic-Bold-WebS.woff");
+@include font-face('SangBleuRepublic', 700, $font-style, "#{$font-path}SangBleuRepublic-Bold-WebXL.woff2", "#{$font-path}SangBleuRepublic-Bold-WebXL.woff");

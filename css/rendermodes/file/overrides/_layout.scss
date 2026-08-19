@@ -1,0 +1,14 @@
+.doc-layout {
+  display: flex;
+  width: 100%;
+  height: auto;
+  &__main {
+    overflow: initial;
+    margin: 0;
+  }
+
+  .doc-main {
+    min-height: unset;
+    height: auto;
+  }
+}

@@ -1,0 +1,39 @@
+// Qt-Styler Custom Phosphor Icons
+// Font files live at: wwwroot/fonts/qt-styler/
+// Selection JSON:     wwwroot/css/vendors/qt-styler/qt-styler.icomoon.json
+//
+// To add new icons:
+//   1. Import your updated set at https://icomoon.io using the JSON file
+//   2. Add the new font files to wwwroot/fonts/qt-styler/
+//   3. Append a glyph entry at the bottom of this file
+//
+// Usage: <i class="ph-qt ph-balloon-alt"></i>
+
+// Font face
+
+@font-face {
+    font-family: "QtstylerPhosphor";
+    // Path is relative to the compiled CSS output at wwwroot/css/
+    src: url("../fonts/qt-styler/QtstylerPhosphor.woff2") format("woff2"),
+         url("../fonts/qt-styler/QtstylerPhosphor.ttf")   format("truetype"),
+         url("../fonts/qt-styler/QtstylerPhosphor.woff")  format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+// Marker class — applied once to every custom icon element.
+// All standard Phosphor icons are completely unaffected.
+.ph-qt {
+    font-family: "QtstylerPhosphor" !important;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+// Glyph map — add one entry per icon (font-family is handled by .ph-qt above)
+.ph-balloon-alt::before { content: "\e904"; }

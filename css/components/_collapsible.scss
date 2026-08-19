@@ -1,0 +1,53 @@
+.doc-collapsible.doc-collapsible--initialized:not(.is-open) {
+    display: none;
+    overflow: hidden;
+}
+
+.doc-collapsible-trigger.doc-collapsible--initialized {
+    position: relative;
+    --doc-collapsible-chevron-space-around: calc(var(--doc-collapsible-chevron-space, 8px) * 2);
+    padding-right: calc(var(--doc-collapsible-chevron-size, 20px) + var(--doc-collapsible-chevron-space-right, 8px) + var(--doc-collapsible-chevron-space-left, 8px));
+
+    &::after {
+        content: "";
+        position: absolute;
+        right: var(--doc-collapsible-chevron-space-right, 8px);
+        top: 50%;
+        transform: translateY(-50%);
+        width: var(--doc-collapsible-chevron-size, 16px);
+        height: var(--doc-collapsible-chevron-size, 16px);
+        background: currentColor;
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpolyline points='208 96 128 176 48 96' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='16'/%3E%3C/svg%3E");
+        mask-size: contain;
+        mask-repeat: no-repeat;
+        mask-position: center;
+        transition: transform 0.2s ease;
+    }
+
+    &.is-open::after {
+        transform: translateY(-50%) rotate(180deg);
+    }
+}
+
+.doc-collapsible-indicator-flush {
+    --doc-collapsible-chevron-space-right: 0px;
+}
+
+.doc-collapsible-trigger--caret-lg {
+    --doc-collapsible-chevron-size: 20px;
+}
+
+.doc-collapsible-trigger.doc-collapsible--initialized,
+[data-collapse-expand-all] {
+    cursor: pointer;
+}
+
+.doc-collapsible-trigger[aria-disabled="true"] {
+    cursor: default;
+    opacity: 0.6;
+}
+
+body:not(.doc-js-enabled) > .doc-js-visible,
+body:not(.doc-js-enabled) .doc-js-visible {
+    display: none !important;
+}

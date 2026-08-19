@@ -1,0 +1,35 @@
+.doc-traveler {
+    height: 100%;
+
+    .doc-card__title {
+        margin-bottom: 4px;
+    }
+
+    .doc-card__body,
+    &__info,
+    &__main{
+        display: grid;
+        align-content: start;
+        gap: 24px;
+    }
+
+    &__flight-item,
+    &__contact-group {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        &>*+* {
+            margin-top: 8px;
+        }
+    }
+
+    &__flight-group {
+        gap: 12px;
+    }
+
+    &__flight-detail>* {
+        white-space: nowrap;
+        font-weight: 700;
+    }
+}

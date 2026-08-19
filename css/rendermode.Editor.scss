@@ -1,0 +1,28 @@
+/* Use this for any Editor specific styles. This file is only included in Editor RenderMode */
+
+
+.module-disabled {
+    display: block;
+    opacity: .3;
+}
+
+
+
+
+[data-insertable], [data-selectable] {
+    cursor: pointer;
+}
+
+
+.insert-module {
+    text-align: center;
+    padding: .5rem;
+    border: 1px var(--doc-editor-color-primary, black) dashed;
+    margin: 1rem;
+    color: var(--doc-editor-color-primary, black);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.module {
+    min-height: 2rem;
+}

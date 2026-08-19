@@ -1,0 +1,18 @@
+﻿@use "../abstracts" as abs;
+
+.doc-rich-content {
+  a {
+    color: abs.get-color("link-primary");
+  }
+  & > p + p {
+    margin-top: 16px;
+  }
+
+  & > ol {
+      margin-inline-start: 22px;
+  }
+
+  & > ol, ul{
+      margin-block: 4px;
+  }
+}

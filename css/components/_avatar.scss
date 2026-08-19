@@ -1,0 +1,18 @@
+@use "../abstracts" as abs;
+
+// Avatar
+.doc-avatar {
+    --doc-avatar-size: 64px;
+    width: var(--doc-avatar-size);
+    height: var(--doc-avatar-size);
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: abs.get-color("fill-mid");
+    overflow: hidden;
+    user-select: none;
+    flex-shrink: 0;
+    // Sizes Modifiers
+    // &--sm { --doc-avatar-size: 32px; }
+    // &--lg { --doc-avatar-size: 64px; }
+    // &--xl { --doc-avatar-size: 80px; }
+}

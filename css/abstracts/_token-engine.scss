@@ -1,0 +1,113 @@
+@use "sass:map";
+@use "sass:meta";
+@use "config";
+@use "sass:list";
+
+// Token system configuration
+$_prefix: config.$prefix !default;
+
+@mixin _gen-color($map) {
+  @each $name, $value in $map {
+    --#{$_prefix}-color-#{$name}: #{$value};
+  }
+}
+
+@mixin _gen-font($map) {
+  @each $name, $stack in $map {
+    --#{$_prefix}-font-#{$name}: #{$stack};
+  }
+}
+
+@mixin _gen-generic($map, $category) {
+  @each $name, $value in $map {
+    --#{$_prefix}-#{$category}-#{$name}: #{$value};
+  }
+}
+
+@mixin _gen-type($map) {
+  @each $level, $values in $map {
+    $size: list.nth($values, 1);
+    $weight: list.nth($values, 2);
+    $lh: list.nth($values, 3);
+    $ls: list.nth($values, 4);
+    $family: list.nth($values, 5);
+
+    $font-stack: var(--#{$_prefix}-font-#{$family});
+    $t: "--#{$_prefix}-type-#{$level}";
+
+    #{$t}-fs: #{$size};
+    #{$t}: #{$weight} var(#{$t}-fs)/#{$lh} #{$font-stack};
+    #{$t}-ls: #{$ls};
+  }
+}
+
+// Typography utility functions
+@function get-typography($level) {
+  @return var(--#{$_prefix}-type-#{$level});
+}
+
+// Typography utility mixin
+@mixin typography($level, $important: false) {
+  @if $important {
+    font: #{get-typography($level)} !important;
+    letter-spacing: #{get-typography(#{$level}-ls)} !important;
+  } @else {
+    font: #{get-typography($level)};
+    letter-spacing: #{get-typography(#{$level}-ls)};
+  }
+}
+
+// Core token functions - simplified API
+@function get-color($name) {
+  @return var(--#{$_prefix}-color-#{$name});
+}
+
+@function get-contrast($light: true) {
+  @return if(sass($light): #{get-color("text-inverse")}; else: #{get-color("text-primary")});
+}
+
+// Universal Token Generator
+@mixin generate-tokens($map, $category) {
+  @if $category == "color" {
+    @include _gen-color($map);
+  } @else if $category == "font" {
+    @include _gen-font($map);
+  } @else if $category == "type" {
+    @include _gen-type($map);
+  } @else {
+    @include _gen-generic($map, $category);
+  }
+}
+
+// Emit tokens with an explicit prefix, overriding the global prefix.
+// Usage: @include emit-tokens($map, "color", "my-brand");
+@mixin emit-tokens($map, $category, $prefix: $_prefix) {
+  $saved: $_prefix;
+  $_prefix: $prefix !global;
+  
+  @each $name, $value in $map {
+    $token-name: $name;
+      @if $category !=  '' {
+        $token-name: #{$category}-#{$name};
+      }
+    @include emit-token($token-name, $value, $prefix);
+  }
+
+  $_prefix: $saved !global;
+}
+
+// Emit a single token: --{prefix}-{name}: {value}
+// @include emit-token("spacing-sm", 0.5rem, "my");  →  --my-spacing-sm: 0.5rem
+@mixin emit-token($name, $value, $prefix: $_prefix) {
+  --#{$prefix}-#{$name}: #{$value};
+}
+
+// Emit a flat map of tokens: --{prefix}-{key}: {value} for each pair.
+// No category — the key names are used as-is.
+// @include emit-token-map(("gap-sm": 0.5rem, "gap-md": 1rem), "my");
+@mixin emit-token-map($map, $prefix: $_prefix) {
+  @each $name, $value in $map {
+    @include emit-token($name, $value, $prefix);
+  }
+}
+

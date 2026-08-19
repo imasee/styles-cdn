@@ -1,0 +1,50 @@
+@use "../abstracts" as abs;
+
+$nav-height: 68px;
+
+.doc-layout {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+
+  &__main {
+    flex: 1 1 auto;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    .no-scroll & {
+      overflow: hidden;
+    }
+
+    @include abs.respond-below("md") {
+      margin-top: var(--doc-layout-main-nav-offset, 0);
+    }
+  }
+
+  .doc-main {
+    min-height: calc(100vh - 500px);
+  }
+}
+
+@include abs.respond-below("md") {
+  [data-render-mode="Web"] .doc-layout {
+    --doc-layout-main-nav-offset: 68px;
+  }
+}
+
+@include abs.respond-above("md") {
+  .doc-layout {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+  }
+
+  .doc-nav {
+    flex: 0 0 auto;
+  }
+}

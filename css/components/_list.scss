@@ -1,0 +1,103 @@
+@use "../abstracts" as abs;
+
+@mixin dot-separator($position: "left") {
+  position: absolute;
+  content: "\00B7";
+  width: var(--doc-list-dot-space, 12px);
+  top: 0;
+  height: 100%;
+  font-weight: bolder;
+  color: currentColor;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  @if $position == "right" {
+    right: 0;
+  } @else {
+    left: 0;
+  }
+}
+
+.doc-summary-list,
+.doc-list,
+.doc-list li > ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li,
+  dd,
+  dt {
+    position: relative;
+    line-height: normal;
+    margin: 0;
+  }
+}
+
+// Rich content prose wrapper — applies doc-list styles to native ul/li (e.g. from markdown)
+.doc-prose {
+  ul,
+  ul li > ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    --doc-list-dot-space: 20px;
+
+    li {
+      position: relative;
+      line-height: normal;
+      margin: 0;
+      padding-left: var(--doc-list-dot-space);
+
+      &::after {
+        @include dot-separator();
+      }
+    }
+  }
+
+  &--list-col-2 > ul {
+    @include abs.respond-above("sm") {
+      column-count: 2;
+      column-gap: var(--doc-column-gap, 20px);
+    }
+  }
+}
+
+// Summary list (horizontal)
+.doc-summary-list {
+  display: flex;
+  flex-flow: row wrap;
+  --doc-list-dot-space: 19px;
+  gap: 8px 0;
+
+  li,
+  dd,
+  dt {
+    padding-right: var(--doc-list-dot-space);
+
+    &::after {
+      @include dot-separator("right");
+    }
+
+    &:last-child::after {
+      display: none;
+    }
+  }
+}
+
+// Regular list and nested lists (vertical)
+.doc-list,
+.doc-list li > ul {
+  --doc-list-dot-space: 20px;
+
+  li,
+  dd,
+  dt {
+    padding-left: var(--doc-list-dot-space);
+
+    &::after {
+      @include dot-separator();
+    }
+  }
+}

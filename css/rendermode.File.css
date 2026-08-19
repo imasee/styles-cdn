@@ -1,0 +1,126 @@
+html {
+  width: 1200px;
+}
+
+.doc-file-page,
+.doc-file-page *,
+.doc-file-cover,
+.doc-file-cover * {
+  box-sizing: border-box;
+}
+
+.doc-file-cover {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  padding: 0;
+  break-inside: avoid;
+  page-break-inside: avoid;
+  break-before: auto;
+}
+
+@media print {
+  [data-pdf-document-footer] {
+    display: none;
+  }
+  .doc-item-container {
+    max-width: unset;
+    padding-left: 0.375in;
+    padding-right: 0.375in;
+  }
+}
+@media print {
+  .page-break-before {
+    break-before: always;
+    page-break-before: always;
+  }
+  .page-break-after {
+    break-after: always;
+    page-break-after: always;
+  }
+  .page-break-avoid {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .page-keep-with-next {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+  .page-keep-with-previous {
+    break-before: avoid;
+    page-break-before: avoid;
+  }
+  .page-break-avoid-inside {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    break-after: auto;
+    page-break-after: auto;
+  }
+  .page-break-allow {
+    break-before: auto;
+    page-break-before: auto;
+    break-after: auto;
+    page-break-after: auto;
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+}
+body {
+  --doc-color-app-background: var(--doc-color-light);
+}
+
+.doc-layout {
+  display: flex;
+  width: 100%;
+  height: auto;
+}
+.doc-layout__main {
+  overflow: initial;
+  margin: 0;
+}
+.doc-layout .doc-main {
+  min-height: unset;
+  height: auto;
+}
+
+.doc-panel {
+  border-radius: 5px;
+  box-shadow: 0 2.147px 3.221px -0.537px rgba(9, 10, 11, 0.1), 0 1.074px 2.147px -1.074px rgba(9, 10, 11, 0.1);
+}
+
+.doc-avatar,
+.doc-badge,
+.doc-badge-pill,
+.doc-chip,
+.doc-chips,
+.doc-divider,
+.doc-icon-badge,
+.doc-image,
+.doc-line-items__item,
+.doc-link,
+.doc-link-group,
+.doc-section-header,
+.svc-image-grid,
+i.ph,
+.doc-timeline__header {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.doc-panel__header,
+.doc-timeline__header,
+.doc-field__label {
+  break-after: avoid;
+  page-break-after: avoid;
+}
+
+.doc-card__body .doc-field__label {
+  break-before: auto;
+  page-break-before: auto;
+  break-after: auto;
+  page-break-after: auto;
+  break-inside: auto;
+  page-break-inside: auto;
+}
+
+/*# sourceMappingURL=rendermode.File.css.map */

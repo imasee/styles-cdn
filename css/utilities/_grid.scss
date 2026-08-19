@@ -1,0 +1,105 @@
+@use "../abstracts" as abs;
+@use "sass:list";
+
+$grid-breakpoints: abs.$breakpoints !default;
+
+$grid-cols-max: 4 !default;
+
+$grid-keyword-exclude-bps: (xl) !default;
+
+@mixin grid-cols-utilities($bp: null) {
+  $infix: if(sass($bp): "-#{$bp}"; else: "");
+
+  @for $i from 1 through $grid-cols-max {
+    .grid-cols#{$infix}-#{$i} {
+      grid-template-columns: repeat(#{$i}, minmax(0, 1fr));
+    }
+  }
+
+  @for $i from 1 through $grid-cols-max {
+    .grid-cols#{$infix}-#{$i}-content {
+      grid-template-columns: repeat(#{$i}, auto);
+    }
+  }
+
+  @if not($bp and list.index($grid-keyword-exclude-bps, $bp)) {
+    .grid-cols#{$infix}-stack {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .grid-cols#{$infix}-auto {
+      grid-template-columns: repeat(auto-fill, minmax(0, 1fr));
+    }
+
+    .grid-cols#{$infix}-none {
+      grid-template-columns: none;
+    }
+
+    .grid-cols#{$infix}-subgrid {
+      grid-template-columns: subgrid;
+    }
+  }
+}
+
+.d-grid,
+[class*="grid-cols-"] {
+  display: grid;
+  gap: var(--doc-grid-gap, 12px);
+}
+
+@include grid-cols-utilities(null);
+
+@each $name, $min in $grid-breakpoints {
+  @if $name != "xs" and $min >0 {
+    @media (min-width: #{$min}) {
+      @include grid-cols-utilities($name);
+    }
+  }
+}
+
+// Flex utilities
+.flex-stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-items-center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+// Responsive utilities
+@include abs.respond-above("sm") {
+  .grid-cols-sm-2f-1f-1f {
+    grid-template-columns: 2fr 1fr 1fr !important;
+  }
+
+  .columns-sm-2 {
+    column-count: 2;
+    column-width: 50%;
+    column-gap: var(--doc-column-gap, 20px);
+    break-inside: avoid;
+    width: 100%;
+
+    &>* {
+      break-inside: avoid;
+      page-break-inside: avoid;
+
+      display: inline-flex;
+      width: 100%;
+    }
+  }
+}
+@include abs.respond-above("lg") {
+  .grid-cols-lg-1f-2f {
+    grid-template-columns: 1fr 2fr !important;
+  }
+
+  .flex-lg-items-center {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+  }
+}

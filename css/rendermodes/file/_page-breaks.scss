@@ -1,0 +1,31 @@
+@use 'core';
+
+@media print {
+  .page-break-before {
+    @include core.break-before;
+  }
+
+  .page-break-after {
+    @include core.break-after;
+  }
+
+  .page-break-avoid {
+    @include core.no-break-inside;
+  }
+
+  .page-keep-with-next {
+    @include core.keep-with-next;
+  }
+
+  .page-keep-with-previous {
+    @include core.keep-with-previous;
+  }
+
+  .page-break-avoid-inside {
+    @include core.no-break-inside-only;
+  }
+
+  .page-break-allow {
+    @include core.allow-breaks;
+  }
+}

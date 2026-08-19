@@ -1,0 +1,169 @@
+@use "sass:map";
+@use "../abstracts" as abs;
+
+$doc-badge-pill-themes: (
+  "ancillary": (
+    bg: abs.get-color("brand-ancillary"),
+    text: abs.get-color("text-primary")
+  ),
+  "fill-mid": (
+    bg: abs.get-color("fill-mid"),
+    text: abs.get-color("text-primary")
+  ),
+  "tertiary": (
+    bg: abs.get-color("brand-tertiary"),
+    text: abs.get-color("text-inverse")
+  )
+);
+
+.doc-chip,
+.doc-icon-badge,
+.doc-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  line-height: 1;
+  width: auto;
+}
+
+.doc-badge-pill {
+  --doc-badge-pill-bg: #{abs.get-color("brand-primary")};
+  --doc-badge-pill-fg: #{abs.get-color("text-inverse")};
+  --doc-icon-size: 20px;
+
+  white-space: nowrap;
+  text-transform: none;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 100px;
+  background-color: var(--doc-badge-pill-bg);
+  color: var(--doc-badge-pill-fg);
+  @include abs.typography("display-body-2");
+  font-weight: 700;
+
+  & > * {
+    line-height: normal;
+  }
+
+  i {
+    color: inherit;
+  }
+
+  &--sm {
+    font-size: 10px;
+  }
+
+  @each $theme, $colors in $doc-badge-pill-themes {
+    &--#{$theme} {
+      --doc-badge-pill-bg: #{map.get($colors, "bg")};
+      --doc-badge-pill-fg: #{map.get($colors, "text")};
+    }
+  }
+}
+
+.doc-icon-badge {
+  --doc-icon-badge-bg: var(--doc-icon-badge-ctx-bg, #{abs.get-color("brand-primary")});
+  --doc-icon-badge-fg: var(--doc-icon-badge-ctx-fg, #{abs.get-color("text-inverse")});
+  --doc-icon-badge-border: transparent;
+  --doc-icon-badge-size: 52px;
+  --doc-icon-badge-icon-size: 32px;
+  --doc-icon-size: var(--doc-icon-badge-icon-size);
+
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--doc-icon-badge-bg);
+  color: var(--doc-icon-badge-fg);
+  border: 1px solid var(--doc-icon-badge-border);
+  font-size: var(--doc-icon-badge-icon-size);
+
+  width: var(--doc-icon-badge-size);
+  height: var(--doc-icon-badge-size);
+  min-width: var(--doc-icon-badge-size);
+  font-size: var(--doc-icon-badge-icon-size);
+
+  & > i {
+    color: inherit;
+  }
+
+  &--secondary {
+    --doc-icon-badge-bg: #{abs.get-color("brand-secondary")};
+    --doc-icon-badge-fg: #{abs.get-color("text-primary")};
+  }
+
+  &--tertiary {
+    --doc-icon-badge-bg: #{abs.get-color("brand-tertiary")};
+    --doc-icon-badge-fg: #{abs.get-color("text-inverse")};
+    --doc-icon-badge-size: 28px;
+    --doc-icon-badge-icon-size: 15px;
+  }
+
+  &--outlined {
+    --doc-icon-badge-bg: transparent;
+    --doc-icon-badge-fg: #{abs.get-color("brand-primary")};
+    --doc-icon-badge-border: var(--doc-icon-badge-fg);
+    --doc-icon-badge-size: 28px;
+    --doc-icon-badge-icon-size: 15px;
+  }
+
+  &--sm {
+    --doc-icon-badge-size: 28px;
+    --doc-icon-badge-icon-size: 15px;
+  }
+
+  &--lg {
+    --doc-icon-badge-size: 52px;
+    --doc-icon-badge-icon-size: 32px;
+  }
+}
+
+// chip
+
+.doc-chip {
+  --doc-chip-bg: #{abs.get-color("fill-container")};
+  --doc-chip-hover-bg: #{abs.get-color("fill-mid")};
+  --doc-chip-fg: #{abs.get-color("text-secondary")};
+  --doc-chip-border: #{abs.get-color("stroke-primary")};
+
+  padding: 4px 12px;
+  height: 30px;
+  margin: 0;
+  border-radius: 100px;
+  white-space: nowrap;
+  text-transform: none;
+  background-color: var(--doc-chip-bg);
+  color: var(--doc-chip-fg);
+  border: 1.5px solid var(--doc-chip-border);
+  @include abs.typography("text-body-2");
+
+  p {
+    margin: 0;
+    white-space: normal;
+    overflow-wrap: break-word;
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 4px 0 -6px;
+    i {
+      font-size: 16px;
+      color: inherit;
+    }
+  }
+}
+
+.doc-chips {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  & > .doc-chip {
+    margin: 0;
+    height: auto;
+    min-height: 30px;
+    max-width: 100%;
+  }
+}

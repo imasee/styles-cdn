@@ -1,0 +1,21 @@
+@use "sass:string";
+@use "base";
+@use "vendors";
+@use "utilities";
+
+@use "layout";
+@use "components";
+
+$render-modes: "Editor", "Web", "File", "Email";
+
+@each $mode in $render-modes {
+    body[data-render-mode='#{$mode}'] .rm-#{string.to-lower-case($mode)}-hidden {
+        display: none;
+    }
+
+    body[data-render-mode]:not(body[data-render-mode='#{$mode}']) .rm-#{string.to-lower-case($mode)}-only {
+        display: none;
+    }
+}
+
+

@@ -1,0 +1,18 @@
+
+// Hide Scrollbar Utility
+.doc-hide-scrollbar {
+  // Firefox
+  scrollbar-width: none;
+
+  // IE and Edge (legacy)
+  -ms-overflow-style: none;
+
+  // Chrome, Safari, and Edge (Chromium)
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+
+
+

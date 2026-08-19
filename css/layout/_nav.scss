@@ -1,0 +1,215 @@
+@use "../abstracts" as abs;
+
+.doc-nav {
+    --doc-nav-bg: #{abs.get-color("brand-primary")};
+    background-color: var(--doc-layout-nav-bg, var(--doc-nav-bg));
+
+    display: flex;
+    flex-direction: column;
+
+    &__toggle {
+        width: 40px;
+        height: 40px;
+        flex: 0 0 40px;
+        align-items: center;
+        position: relative;
+        padding: 0;
+
+        &-icon-open {
+            display: var(--doc-nav-opened-icon-display, block) !important;
+        }
+
+        &-icon-close {
+            display: var(--doc-nav-closed-icon-display, none) !important;
+        }
+    }
+
+    &__head {
+        display: grid;
+        grid-template-columns: 1fr 40px;
+        align-items: center;
+        gap: 20px;
+    }
+
+    &__brand {
+        max-height: 32px;
+        height: 32px;
+        height: 100%;
+        display: inline-flex;
+        align-items: center;
+
+        &>img,
+        &>svg,
+        &>* {
+            object-fit: contain;
+            background-repeat: no-repeat;
+            height: inherit;
+            width: auto;
+        }
+    }
+
+    &__ref {
+        flex-shrink: 0;
+    }
+
+    &__main {
+        display: flex;
+        flex-direction: column;
+        flex: 0 0 auto;
+    }
+
+    &__body {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    &__navs {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    &__btn {
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        text-align: left;
+        gap: 8px;
+        color: inherit;
+        --doc-icon-color: currentColor;
+
+        &>*:not(i) {
+            min-width: 0;
+        }
+    }
+
+    &__btn--child {
+        margin-left: 20px;
+        width: calc(100% - 20px);
+        padding-left: 8px;
+        opacity: 0.9;
+    }
+
+    &__advisor {
+        gap: 16px;
+    }
+}
+
+.doc-nav.doc-nav-mode-appbar {
+    position: fixed;
+    z-index: 600;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 0 16px;
+    max-height: calc(100vh - 60px);
+
+    .doc-nav__head {
+        padding: 10px 0;
+        height: 68px;
+    }
+
+    .doc-nav__body {
+        padding: 10px 0;
+        flex: 1;
+        overflow-y: auto;
+        display: var(--doc-nav-appbar-content-display, none);
+    }
+
+    .doc-nav__navs {
+      display: grid;
+      gap: 16px;
+    }
+
+    &:not(.is-collapsed) {
+        padding-bottom: 20px;
+        --doc-nav-appbar-content-display: flex;
+        --doc-nav-opened-icon-display: none;
+        --doc-nav-closed-icon-display: block;
+    }
+}
+
+.doc-nav.doc-nav-mode-sidebar {
+    height: 100%;
+    overflow-y: auto;
+    padding: 0 var(--doc-nav-spacing, 32px) 32px;
+    width: 300px;
+    gap: 10px;
+
+    .doc-nav__navs {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .doc-nav__head {
+        padding-top: 32px;
+        flex: 0 0 auto;
+    }
+
+    .doc-nav__main {
+        flex: 1;
+        min-height: 0;
+        height: auto;
+        overflow: hidden;
+        overflow-y: auto;
+    }
+
+    .doc-nav__body {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+    }
+
+    &.is-collapsed {
+        --doc-nav-spacing: 12px;
+        width: 64px;
+        max-width: 64px;
+        overflow-x: hidden;
+
+        .doc-avatar {
+            --doc-avatar-size: 40px;
+        }
+
+        .doc-layout__nav-head,
+        .doc-layout__nav-main {
+            margin: 0;
+        }
+
+        .doc-nav__seperator,
+        .doc-nav__advisor-links,
+        .doc-nav__brand,
+        .doc-nav__btn-text,
+        .doc-nav__btn-arrow,
+        .doc-nav__ref--expandable,
+        .doc-nav__advisor-info,
+        .doc-nav__btn--child {
+            display: none !important;
+        }
+
+        .doc-nav__toggle,
+        .doc-nav__btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .doc-nav__btn {
+            border: 1px solid #{abs.get-color("stroke-primary")};
+            padding: 0;
+        }
+
+        .doc-nav__navs,
+        .doc-nav__main {
+            gap: 16px 0;
+        }
+    }
+}

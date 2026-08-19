@@ -1,0 +1,105 @@
+@use "../abstracts" as abs;
+
+.doc-btn {
+  --doc-btn-color: #{abs.get-color("text-primary")};
+  --doc-btn-background: transparent;
+  --doc-btn-border-color: transparent;
+  --doc-btn-state-layer-color: #{abs.get-color("fill-dark")};
+  --doc-icon-size: 16px;
+
+  min-height: var(--doc-btn-height, 32px);
+  display: inline-flex;
+  gap: 8px;
+  padding: 7.5px 12px;
+  color: var(--doc-btn-color);
+  background-color: var(--doc-btn-background);
+  border: 1px solid var(--doc-btn-border-color);
+  border-radius: var(--doc-btn-border-radius, 4px);
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  @include abs.typography("display-button");
+  text-transform: uppercase;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--doc-btn-state-layer-color);
+    opacity: var(--doc-btn-state-layer-opacity, 0);
+    transition: opacity 0.15s;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  & > * {
+    position: relative;
+    z-index: 2;
+    white-space: initial;
+  }
+
+  i + * {
+    margin-top: 1px;
+  }
+
+  &:hover {
+    --doc-btn-state-layer-opacity: 0.18;
+  }
+
+  &:active {
+    --doc-btn-state-layer-opacity: 0.22;
+  }
+
+  &:focus {
+    outline: 2px solid var(--doc-btn-color);
+    outline-offset: 2px;
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--doc-btn-color);
+    outline-offset: 2px;
+  }
+
+  &:disabled,
+  &[disabled] {
+    opacity: 0.38;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  // Primary Button (filled)
+  &--primary,
+  &--primary-outlined {
+    --doc-btn-color: #{abs.get-color("text-inverse")};
+    --doc-btn-background: #{abs.get-color("brand-primary")};
+  }
+  &--primary-outlined {
+    --doc-btn-border-color: #{abs.get-color("stroke-primary")};
+  }
+
+  // Small
+  &--sm {
+    --doc-btn-height: 26px;
+    padding: 4px 8px;
+    font-size: 12px;
+    letter-spacing: 1.08px;
+    i + * {
+      margin-top: 4px;
+    }
+  }
+
+  &.doc-btn--centered {
+    justify-content: center;
+  }
+}

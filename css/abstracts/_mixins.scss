@@ -1,0 +1,36 @@
+@use "functions" as func;
+@use "./breakpoints" as bp;
+@use "sass:map";
+
+@mixin container-layout($max-width: 1140px, $py: (), $px: ()) {
+  $default-y: (
+    "base": 20px,
+    "md": 40px
+  );
+
+  $default-x: (
+    "base": 16px,
+    "sm": 32px,
+    "lg": 80px
+  );
+
+  $y: map.merge($default-y, $py);
+  $x: map.merge($default-x, $px);
+
+  max-width: $max-width;
+  margin-inline: auto;
+
+  padding: map.get($y, "base") map.get($x, "base");
+
+  @include bp.respond-above("sm") {
+    padding: map.get($y, "base") map.get($x, "sm");
+  }
+
+  @include bp.respond-above("md") {
+    padding: map.get($y, "md") map.get($x, "sm");
+  }
+
+  @include bp.respond-above("lg") {
+    padding: map.get($y, "md") map.get($x, "lg");
+  }
+}

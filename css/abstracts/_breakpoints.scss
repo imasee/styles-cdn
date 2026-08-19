@@ -1,0 +1,137 @@
+@use 'functions'as func;
+@use 'sass:map';
+@use "sass:math";
+@use "sass:meta";
+
+// Define breakpoints variable
+$breakpoints: (
+  xs: 0,
+  sm: func.rem(600),
+  md: func.rem(900),
+  lg: func.rem(1200),
+  xl: func.rem(1536),
+) !default;
+
+$nex-utils-breakpoints: func.map-get-multiple($breakpoints, (xs, sm, md, lg)) !default;
+
+// Minimum breakpoint width. Null for the smallest (first) breakpoint.
+@function breakpoint-min($name, $breakpoints) {
+  $min: map.get($breakpoints, $name);
+  @if $min != 0 {
+    @return $min;
+  }
+  @return null;
+}
+
+// Maximum breakpoint width.
+@function breakpoint-max($name, $breakpoints) {
+  $max: map.get($breakpoints, $name);
+  @if $max and $max > 0 {
+    @return $max - .02;
+  }
+  @return null;
+}
+
+// Returns a blank string if smallest breakpoint, otherwise returns the name with a dash in front.
+@function breakpoint-infix($name, $breakpoints) {
+  @if breakpoint-min($name, $breakpoints) == null {
+    @return "";
+  }
+  @return "-#{$name}";
+}
+
+/// Min‑width media query. Accepts a map key (e.g. sm) or any CSS length (px/rem/em/vw).
+/// @param $breakpoint      Key or length.
+/// @param $all-breakpoints Map of breakpoints (default: $breakpoints).
+@mixin respond-above($breakpoint, $all-breakpoints: $breakpoints) {
+  $is-length: meta.type-of($breakpoint)=="number"and math.unit($breakpoint) !="";
+
+  @if not $is-length and not map.has-key($all-breakpoints, $breakpoint) {
+    @warn "respond-above: invalid breakpoint ‘#{$breakpoint}’.";
+  }
+
+  $min: breakpoint-min($breakpoint, $all-breakpoints);
+  @if $is-length {
+    $min: $breakpoint;
+  }
+
+  @if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  }
+
+  @else {
+    @content;
+  }
+}
+
+/// Max‑width media query. Accepts a map key (e.g. lg) or any CSS length (px/rem/em/vw).
+/// @param $breakpoint      Key or length.
+/// @param $all-breakpoints Map of breakpoints (default: $breakpoints).
+@mixin respond-below($breakpoint, $all-breakpoints: $breakpoints) {
+  $is-length: meta.type-of($breakpoint)=="number"and math.unit($breakpoint) !="";
+
+  @if not $is-length and not map.has-key($all-breakpoints, $breakpoint) {
+    @warn "respond-below: invalid breakpoint ‘#{$breakpoint}’.";
+  }
+
+  $max: breakpoint-max($breakpoint, $all-breakpoints);
+  @if $is-length {
+    $max: $breakpoint;
+  }
+
+  @if $max {
+    @media (max-width: $max) {
+      @content;
+    }
+  }
+
+  @else {
+    @content;
+  }
+}
+
+/// Range media query. Accepts map keys or any CSS lengths for both bounds.
+/// @param $from             Lower key or length.
+/// @param $to               Upper key or length.
+/// @param $all-breakpoints  Map of breakpoints (default: $breakpoints).
+@mixin respond-between($from, $to, $all-breakpoints: $breakpoints) {
+  $from-is-length: meta.type-of($from)=="number"and math.unit($from) !="";
+  $to-is-length: meta.type-of($to)=="number"and math.unit($to) !="";
+
+  @if not $from-is-length and not map.has-key($all-breakpoints, $from) {
+    @warn "respond-between: invalid lower bound ‘#{$from}’.";
+  }
+
+  @if not $to-is-length and not map.has-key($all-breakpoints, $to) {
+    @warn "respond-between: invalid upper bound ‘#{$to}’.";
+  }
+
+  $min: breakpoint-min($from, $all-breakpoints);
+  @if $from-is-length {
+    $min: $from;
+  }
+  $max: breakpoint-max($to, $all-breakpoints);
+  @if $to-is-length {
+    $max: $to;
+  }
+
+  @if $min !=null and $max !=null {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  }
+
+  @else if $max==null {
+    @include respond-above($from, $all-breakpoints) {
+      @content;
+    }
+  }
+
+  @else if $min==null {
+    @include respond-below($to, $all-breakpoints) {
+      @content;
+    }
+  }
+}

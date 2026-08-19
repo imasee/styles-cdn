@@ -1,0 +1,124 @@
+@use "sass:math";
+@use "sass:map";
+@use "sass:meta";
+
+/// Converts pixel values to rem
+/// @param {Number} $px - Value in pixels (with or without unit)
+/// @return {Number} - Value in rem
+@function rem($px) {
+  @if math.is-unitless($px) {
+    @return math.div($px, 16) * 1rem;
+  }
+  @return math.div($px, 16px) * 1rem;
+}
+
+/// Creates a semi-transparent version of a color
+/// - Uses rgba() when possible for best browser support
+/// - Falls back to color-mix() for advanced color spaces
+/// @param {Color} $color - Base color (any valid Sass color)
+/// @param {Number} $opacity - Opacity level (0 to 1)
+/// @return {Color} - Semi-transparent version
+@function color-alpha($color, $opacity) {
+  @if meta.type-of($color) == 'color' {
+    @return rgba($color, $opacity);
+  } @else {
+    @return color-mix(in srgb, $color #{$opacity * 100%}, transparent);
+  }
+}
+
+/// Lightens a color by mixing it with white (Tint).
+/// - Uses standard Sass mix() for calculated colors
+/// - Falls back to color-mix() for CSS variables
+/// @param {Color} $color - Base color
+/// @param {Number} $amount - Amount of white to mix in (0 to 1)
+/// @return {Color} - Lighter version
+@function color-tint($color, $amount) {
+  $percentage: $amount * 100%;
+
+  @if meta.type-of($color) == 'color' {
+    @return mix(white, $color, $percentage);
+  } @else {
+    @return color-mix(in srgb, white #{$percentage}, $color);
+  }
+}
+
+/// Darkens a color by mixing it with black (Shade).
+/// - Uses standard Sass mix() for calculated colors
+/// - Falls back to color-mix() for CSS variables
+/// @param {Color} $color - Base color
+/// @param {Number} $amount - Amount of black to mix in (0 to 1)
+/// @return {Color} - Darker version
+@function color-shade($color, $amount) {
+  $percentage: $amount * 100%;
+
+  @if meta.type-of($color) == 'color' {
+    @return mix(black, $color, $percentage);
+  } @else {
+    @return color-mix(in srgb, black #{$percentage}, $color);
+  }
+}
+
+/// Custom division function.
+/// Performs integer and fractional division with configurable precision.
+/// Supports unit-aware results for px, rem, em, and %.
+@function divide($dividend, $divisor, $precision: 10) {
+  $sign: 1;
+  @if not (($dividend > 0 and $divisor > 0) or ($dividend < 0 and $divisor < 0)) {
+    $sign: -1;
+  }
+  $dividend: math.abs($dividend);
+  $divisor: math.abs($divisor);
+  @if $dividend == 0 {
+    @return 0;
+  }
+  @if $divisor == 0 {
+    @error "Cannot divide by 0";
+  }
+  $remainder: $dividend;
+  $result: 0;
+  $factor: 10;
+  @while ($remainder > 0 and $precision >= 0) {
+    $quotient: 0;
+    @while ($remainder >= $divisor) {
+      $remainder: $remainder - $divisor;
+      $quotient: $quotient + 1;
+    }
+    $result: $result * 10 + $quotient;
+    $factor: $factor * .1;
+    $remainder: $remainder * 10;
+    $precision: $precision - 1;
+    @if ($precision < 0 and $remainder >= $divisor * 5) {
+      $result: $result + 1;
+    }
+  }
+  $result: $result * $factor * $sign;
+  $dividend-unit: math.unit($dividend);
+  $divisor-unit: math.unit($divisor);
+  $unit-map: (
+    "px": 1px,
+    "rem": 1rem,
+    "em": 1em,
+    "%": 1%
+  );
+  @if ($dividend-unit != $divisor-unit and map.has-key($unit-map, $dividend-unit)) {
+    $result: $result * map.get($unit-map, $dividend-unit);
+  }
+  @return $result;
+}
+
+/// @param {Map} $map - The source map (e.g., $utilities)
+/// @param {List} $keys - The list of keys to extract
+/// @return {Map} - A new map containing only the requested keys
+@function map-get-multiple($map, $keys) {
+  $result: ();
+
+  @each $key in $keys {
+    @if map.has-key($map, $key) {
+      $result: map.merge($result, ($key: map.get($map, $key)));
+    } @else {
+      @warn "The key '#{$key}' was not found in the map.";
+    }
+  }
+
+  @return $result;
+}

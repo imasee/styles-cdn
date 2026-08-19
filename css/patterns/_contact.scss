@@ -1,0 +1,12 @@
+.doc-contact-card__body {
+  display: grid;
+  align-items: start;
+  gap: 8px;
+}
+
+/* XL: 96 rem */
+@media (min-width: 96rem) {
+  .doc-contact-card__body {
+    grid-template-columns: 501fr 252fr 171fr;
+  }
+}

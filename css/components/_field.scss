@@ -1,0 +1,55 @@
+@use "../abstracts" as abs;
+
+// Field
+.doc-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px 0;
+  align-items: flex-start;
+
+  & > * {
+    margin: 0;
+  }
+
+  &__label {
+    @include abs.typography("display-body-2");
+    text-transform: uppercase;
+    line-height: 17px;
+    font-weight: 700;
+    color: var(--doc-field-label-color, #{abs.get-color("text-secondary")});
+  }
+
+  &--primary {
+    --doc-field-label-color: #{abs.get-color("text-primary")};
+  }
+
+  &__text,
+  p {
+    @include abs.typography("text-body-1");
+  }
+
+  &__text {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    & > * {
+      margin: 0;
+    }
+  }
+}
+
+.doc-field-info {
+  display: flex;
+  gap: 4px;
+  align-items: flex-start;
+
+  & > * {
+    margin: 0;
+    display: inline-block;
+  }
+
+  & > *:first-child {
+    font-weight: 700;
+  }
+}

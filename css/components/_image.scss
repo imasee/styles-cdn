@@ -1,0 +1,52 @@
+@use "../abstracts" as abs;
+
+// Image
+
+.doc-image-grid,
+.doc-image {
+  display: block;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  object-fit: cover;
+  background-size: cover;
+}
+
+.doc-image-grid img,
+.doc-image img {
+  display: block;
+  height: var(--doc-image-height, inherit);
+  width: var(--doc-image-width, inherit);
+  max-height: var(--doc-image-max-height, inherit);
+  background-repeat: no-repeat;
+  background-size: cover;
+  object-fit: cover;
+  user-select: none;
+}
+
+.doc-image--mh {
+  --doc-image-height: 224px;
+}
+
+.doc-image-grid {
+  --doc-image-height: 128px;
+  --doc-image-width: 100%;
+  --doc-image-grid-cols: 2;
+  display: grid;
+  grid-template-columns: repeat(var(--doc-image-grid-cols), 1fr);
+  grid-auto-rows: var(--doc-image-height);
+  align-items: stretch;
+  align-content: stretch;
+
+  gap: 0;
+  width: 100%;
+  background-color: abs.get-color("fill-dark");
+}
+
+@include abs.respond-above("lg") {
+  .doc-image-grid {
+    --doc-image-grid-cols: 4;
+    --doc-image-height: 255px;
+  }
+}

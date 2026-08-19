@@ -1,0 +1,27 @@
+@use "../abstracts" as abs;
+@use "../tokens" as t;
+
+:root {
+  /**
+ * Design Tokens: Color Palette
+ * --doc-color-{name} and contrast variants (--doc-color-on-{name}).
+ */
+  @include abs.generate-tokens(t.$colors, "color");
+  /**
+ * Design Tokens: Font Stacks
+ * font family variables: --doc-font-{name}.
+ */
+  @include abs.generate-tokens(t.$font-stacks, "font");
+  /**
+ * Design Tokens: Type Scale
+ * --doc-type-{level} (font shorthand) and --doc-type-{level}-ls (letter-spacing).
+ */
+  @include abs.generate-tokens(t.$type-scale, "type");
+}
+
+/* Responsive Type Scale Adjustments for small screens */
+@include abs.respond-below("sm") {
+  :root {
+    @include abs.emit-tokens(t.$type-scale-sizes-xs, "type");
+  }
+}

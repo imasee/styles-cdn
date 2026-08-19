@@ -1,0 +1,95 @@
+@use "../abstracts" as abs;
+
+.doc-card {
+  --doc-card-stroke: #{abs.get-color("stroke-primary")};
+  --doc-card-bg: #{abs.get-color("fill-light")};
+
+  --doc-card-header-bg: #{abs.get-color("fill-ancillary")};
+	--doc-card-header-fg: #{abs.get-color("text-inverse")};
+	
+  --doc-card-fg:inherit;
+  --doc-card-spacing: 12px;
+
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: var(--doc-card-bg);
+  color: var(--doc-card-fg);
+  border: 1px solid var(--doc-card-stroke);
+  border-radius: 8px;
+  width: 100%;
+  overflow: hidden;
+
+  &__body {
+    padding: 12px;
+    flex: 1;
+  }
+
+  &__media {
+    width: 100%;
+    height: 280px;
+    flex-shrink: 0;
+    background-size: cover;
+    object-fit: cover;
+    background-repeat: no-repeat;
+  }
+
+	&__header{
+		background-color: var(--doc-card-header-bg);
+		color: var(--doc-card-header-fg);
+    padding: 16px;
+    display: flex;
+    align-items: center;
+	}
+
+  &__title{
+    @include abs.typography("display-headline-2");
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  &--primary {
+    --doc-card-bg: #{abs.get-color("brand-primary")};
+    --doc-card-fg: #{abs.get-color("text-inverse")};
+    --doc-card-stroke: var(--doc-card-bg);
+  }
+
+  &--secondary {
+    --doc-card-bg: #{abs.get-color("brand-secondary")};
+    --doc-card-fg: #{abs.get-color("text-primary")};
+  }
+
+  &--ancillary {
+    --doc-card-bg: #{abs.get-color("brand-ancillary")};
+    --doc-card-fg: #{abs.get-color("text-primary")};
+  }
+
+  &--fill-ancillary {
+    --doc-card-bg: #{abs.get-color("fill-ancillary")};
+    --doc-card-fg: #{abs.get-color("text-inverse")};
+  }
+
+  &--fill-light {
+    --doc-card-bg: #{abs.get-color("fill-light")};
+    --doc-card-fg: #{abs.get-color("text-primary")};
+  } 
+
+  &--fill-mid{
+    --doc-card-bg: #{abs.get-color("fill-mid")};
+    --doc-card-fg: #{abs.get-color("text-primary")};
+  }
+
+  &--dark {
+    --doc-card-bg: #{abs.get-color("fill-dark")};
+    --doc-card-fg: #{abs.get-color("text-inverse")};
+    --doc-card-stroke: var(--doc-card-bg);
+  }
+
+  &--outlined {
+    --doc-card-stroke: #{abs.get-color("stroke-primary")};
+  }
+
+  &--no-border {
+    border: none;
+  }
+}

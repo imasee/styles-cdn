@@ -1,0 +1,53 @@
+@use "../abstracts" as abs;
+
+// Link styles
+
+a,
+.doc-link {
+  --doc-icon-color: var(--doc-btn-link-icon-color, #{abs.get-color("text-primary")});
+  --doc-icon-size: 16px;
+  --doc-icon-box-size: 20px;
+
+  color: var(--doc-btn-link-color);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-underline-offset: 3px;
+  font-weight: 700;
+  &:hover {
+    text-decoration: none;
+  }
+}
+.doc-link {
+  --doc-btn-link-color: #{abs.get-color("link-primary")};
+  &--base {
+    --doc-btn-link-color: inherit;
+  }
+
+  &--lead {
+    @include abs.typography("display-body-1");
+    text-transform: uppercase;
+  }
+}
+
+.doc-link-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    --doc-icon-size: 16px;
+}
+
+.doc-btn-link {
+  text-decoration: none;
+  display: inline-flex;
+  --doc-icon-color: inherit;
+  &__text {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  &:hover &__text {
+    text-decoration: none;
+  }
+}
