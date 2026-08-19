@@ -114,6 +114,13 @@ i.ph,
   page-break-after: avoid;
 }
 
+.doc-field {
+  display: block;
+}
+.doc-field > * + * {
+  margin-top: 4px;
+}
+
 .doc-card__body .doc-field__label {
   break-before: auto;
   page-break-before: auto;

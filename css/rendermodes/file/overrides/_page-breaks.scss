@@ -24,6 +24,16 @@ i.ph,
   @include core.keep-with-next;
 }
 
+// break-after is ignored inside flex containers by most print/PDF engines, so
+// .doc-field must lay out as a block for .doc-field__label's keep-with-next to work
+.doc-field {
+  display: block;
+
+  > * + * {
+    margin-top: 4px;
+  }
+}
+
 .doc-card__body .doc-field__label {
   @include core.allow-breaks;
 }
