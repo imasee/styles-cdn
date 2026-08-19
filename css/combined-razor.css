@@ -1,0 +1,1312 @@
+﻿/* Combined from 27 *.razor.css file(s) on 2026-08-19 22:49:14. ::deep stripped. */
+
+/* TripArc.DocumentLayout.ExampleSourceApp\Components\Layout\MainLayout.razor.css */
+.page {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+.sidebar {
+    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+}
+
+.top-row {
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #d6d5d5;
+    justify-content: flex-end;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+}
+
+    .top-row a, .top-row .btn-link {
+        white-space: nowrap;
+        margin-left: 1.5rem;
+        text-decoration: none;
+    }
+
+    .top-row a:hover, .top-row .btn-link:hover {
+        text-decoration: underline;
+    }
+
+    .top-row a:first-child {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+@media (max-width: 640.98px) {
+    .top-row {
+        justify-content: space-between;
+    }
+
+    .top-row a, .top-row .btn-link {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 641px) {
+    .page {
+        flex-direction: row;
+    }
+
+    .sidebar {
+        width: 250px;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+    }
+
+    .top-row {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .top-row.auth a:first-child {
+        flex: 1;
+        text-align: right;
+        width: 0;
+    }
+
+    .top-row, article {
+        padding-left: 2rem !important;
+        padding-right: 1.5rem !important;
+    }
+}
+
+#blazor-error-ui {
+    color-scheme: light only;
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }
+
+/* TripArc.DocumentLayout.ExampleSourceApp\Components\Layout\ReconnectModal.razor.css */
+.components-reconnect-first-attempt-visible,
+.components-reconnect-repeated-attempt-visible,
+.components-reconnect-failed-visible,
+.components-pause-visible,
+.components-resume-failed-visible,
+.components-rejoining-animation {
+    display: none;
+}
+
+#components-reconnect-modal.components-reconnect-show .components-reconnect-first-attempt-visible,
+#components-reconnect-modal.components-reconnect-show .components-rejoining-animation,
+#components-reconnect-modal.components-reconnect-paused .components-pause-visible,
+#components-reconnect-modal.components-reconnect-resume-failed .components-resume-failed-visible,
+#components-reconnect-modal.components-reconnect-retrying,
+#components-reconnect-modal.components-reconnect-retrying .components-reconnect-repeated-attempt-visible,
+#components-reconnect-modal.components-reconnect-retrying .components-rejoining-animation,
+#components-reconnect-modal.components-reconnect-failed,
+#components-reconnect-modal.components-reconnect-failed .components-reconnect-failed-visible {
+    display: block;
+}
+
+
+#components-reconnect-modal {
+    background-color: white;
+    width: 20rem;
+    margin: 20vh auto;
+    padding: 2rem;
+    border: 0;
+    border-radius: 0.5rem;
+    box-shadow: 0 3px 6px 2px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: display 0.5s allow-discrete, overlay 0.5s allow-discrete;
+    animation: components-reconnect-modal-fadeOutOpacity 0.5s both;
+    &[open]
+
+{
+    animation: components-reconnect-modal-slideUp 1.5s cubic-bezier(.05, .89, .25, 1.02) 0.3s, components-reconnect-modal-fadeInOpacity 0.5s ease-in-out 0.3s;
+    animation-fill-mode: both;
+}
+
+}
+
+#components-reconnect-modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+    animation: components-reconnect-modal-fadeInOpacity 0.5s ease-in-out;
+    opacity: 1;
+}
+
+@keyframes components-reconnect-modal-slideUp {
+    0% {
+        transform: translateY(30px) scale(0.95);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes components-reconnect-modal-fadeInOpacity {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes components-reconnect-modal-fadeOutOpacity {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.components-reconnect-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+#components-reconnect-modal p {
+    margin: 0;
+    text-align: center;
+}
+
+#components-reconnect-modal button {
+    border: 0;
+    background-color: #6b9ed2;
+    color: white;
+    padding: 4px 24px;
+    border-radius: 4px;
+}
+
+    #components-reconnect-modal button:hover {
+        background-color: #3b6ea2;
+    }
+
+    #components-reconnect-modal button:active {
+        background-color: #6b9ed2;
+    }
+
+.components-rejoining-animation {
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+    .components-rejoining-animation div {
+        position: absolute;
+        border: 3px solid #0087ff;
+        opacity: 1;
+        border-radius: 50%;
+        animation: components-rejoining-animation 1.5s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+    }
+
+        .components-rejoining-animation div:nth-child(2) {
+            animation-delay: -0.5s;
+        }
+
+@keyframes components-rejoining-animation {
+    0% {
+        top: 40px;
+        left: 40px;
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+
+    4.9% {
+        top: 40px;
+        left: 40px;
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+
+    5% {
+        top: 40px;
+        left: 40px;
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+
+    100% {
+        top: 0px;
+        left: 0px;
+        width: 80px;
+        height: 80px;
+        opacity: 0;
+    }
+}
+
+/* TripArc.DocumentLayout.Modules\Trip\Accommodation\AccommodationDetailPanel.razor.css */
+.doc-accommodation-details__body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px 0;
+}
+
+.doc-accommodation-details {
+  padding: 20px;
+}
+
+.doc-accommodation-details__img {
+  --doc-image-height: 471px;
+}
+
+.doc-accommodation-details__editor-img {
+    --doc-image-height: 400px;
+}
+
+.doc-accommodation-details__img-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  --doc-image-height: 110px;
+}
+
+/* TripArc.DocumentLayout.Modules\Trip\Common\ServiceImageGrid.razor.css */
+.svc-image-grid {
+    display: grid;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.svc-image-grid__cell {
+    position: relative;
+    overflow: hidden;
+    line-height: 0;
+    height: var(--svc-grid-image-height, 127px);
+}
+
+.svc-image-grid__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Mobile: max 37.5rem */
+@media (max-width: 37.5rem) {
+    .svc-image-grid--3 {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .svc-image-grid--3 .svc-image-grid__cell:nth-child(3) {
+        grid-column: 1 / -1;
+    }
+
+    .svc-image-grid--4 {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* SM: min 37.5rem */
+@media (min-width: 37.5rem) {
+    .svc-image-grid {
+        --svc-grid-image-height: 255px;
+    }
+
+    .svc-image-grid--2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .svc-image-grid--3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .svc-image-grid--4 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* TripArc.DocumentLayout.Modules\Trip\Comparisons\AccommodationComparisonCard.razor.css */
+.doc-comparison-accommodation-images {
+  margin: -16px -16px 16px;
+}
+
+.doc-image.doc-comparison-accommodation__img {
+  height: 184px;
+  --doc-img-height: 184px;
+  border-radius: 0;
+}
+
+.doc-comparison-accommodation__carousel .swiper-button-disabled {
+  display: none;
+}
+
+/* LG: 75 rem */
+@media (min-width: 75rem) {
+  .doc-image.doc-comparison-accommodation__img {
+    height: 300px;
+    --doc-img-height: 300px;
+  }
+}
+
+/* TripArc.DocumentLayout.Modules\Trip\Comparisons\ActivityComparisonCard.razor.css */
+
+.doc-comparison-activity-images {
+    margin: -16px -16px 16px;
+}
+
+.doc-image.doc-comparison-activity__img {
+    height: 184px;
+    --doc-img-height: 184px;
+    border-radius: 0;
+}
+
+
+/* LG: 75 rem */
+@media (min-width: 75rem) {
+    .doc-image.doc-comparison-activity__img {
+        height: 300px;
+        --doc-img-height: 300px;
+    }
+}
+
+/* TripArc.DocumentLayout.Modules\Trip\Comparisons\AirComparisonCard.razor.css */
+.doc-air-compare__leg:last-child {
+  margin-bottom: 0;
+}
+
+.doc-timeline.doc-air-compare-timeline {
+  --doc-timeline-marker-size: 10px;
+}
+
+.doc-timeline.doc-air-compare-timeline::before {
+  border: none;
+  width: 1px;
+  background-image: repeating-linear-gradient(
+    180deg,
+    var(--doc-color-stroke-primary),
+    var(--doc-color-stroke-primary) 6px,
+    transparent 6px,
+    transparent 9px
+  );
+  background-position: left top;
+  background-repeat: repeat-y;
+  background-size: 1px 100%;
+}
+
+.doc-timeline.doc-air-compare-timeline .doc-timeline__marker {
+  display: block;
+  width: 10px;
+  height: 10px;
+  content: "";
+  background: #55534e;
+  border-radius: 50%;
+}
+
+.doc-air-compare__segment-title > i {
+  line-height: 1;
+  display: inline-flex;
+  transform: translateY(-2px);
+}
+
+/* Detail Table */
+
+.doc-table.doc-air-compare-detail-table {
+  min-width: unset;
+}
+
+.doc-table.doc-air-compare-detail-table td {
+  padding-block: 8px 4px;
+  padding-inline: 0 8px;
+  font-weight: 450;
+}
+
+.doc-table.doc-air-compare-detail-table td:first-child {
+  max-width: 140px;
+  padding-inline: 0 32px;
+}
+
+.doc-table.doc-air-compare-detail-table td:last-child {
+  font-weight: 700;
+}
+
+.doc-table.doc-air-compare-detail-table .doc-air-banner {
+  max-height: 16px;
+  height: 16px;
+  width: auto;
+  object-fit: contain;
+  background-repeat: no-repeat;
+}
+
+.doc-air-compare__layover {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-block: 16px 20px;
+}
+
+.doc-air-compare__layover-pill {
+  white-space: wrap;
+}
+
+/* TripArc.DocumentLayout.Modules\Trip\Comparisons\ComparisonGroup.razor.css */
+.doc-compare__group {
+  margin-top: 40px;
+}
+
+.doc-compare__group h2 {
+  margin-bottom: 12px;
+}
+
+.doc-compare__group p {
+  margin-bottom: 24px;
+  color: var(--doc-color-text-secondary);
+}
+
+/* Carousel layout for Web mode */
+.doc-compare__carousel {
+  position: relative;
+  margin: 24px 0;
+}
+
+/* Grid layout for Editor/File mode */
+.doc-compare__grid {
+    display: grid;
+    gap: 8px;
+    width: 100%;
+    margin: 24px 0;
+}
+
+/* Individual service card */
+.doc-compare__service-card {
+  padding: 20px;
+  border: 1px solid var(--doc-color-stroke-primary);
+  border-radius: 4px;
+  background-color: var(--doc-color-fill-light);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.doc-compare__service-card h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.doc-compare__service-card p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--doc-color-text-primary);
+}
+
+/* TripArc.DocumentLayout.Modules\Trip\Comparisons\ComparisonItem.razor.css */
+/* ComparisonItem wrapper - minimal since it's mostly a layout pass-through */
+
+[data-carousel-slide] {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+[data-carousel-slide] > * {
+  flex: 1;
+}
+
+/* TripArc.DocumentLayout.Modules\Trip\Comparisons\ComparisonLayout.razor.css */
+.doc-compare__carousel {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transform: rotate(0deg);
+  padding: 0 1px;
+}
+
+.doc-compare__carousel > .doc-carousel--has-navigation {
+  margin-top: 52px;
+}
+
+.doc-compare__carousel > .doc-carousel {
+  flex: 1;
+  min-height: 0;
+  --swiper-navigation-size: 40px;
+  overflow: visible;
+}
+
+.doc-compare__carousel .doc-carousel__slide {
+  min-width: var(--compare-slide-min-width, 310px);
+  display: flex;
+  flex-direction: column;
+  height: unset;
+}
+
+.doc-compare__carousel > .doc-carousel > .doc-carousel__prev,
+.doc-compare__carousel > .doc-carousel > .doc-carousel__next {
+  position: fixed;
+  top: 0;
+  margin: 0;
+  background-color: var(--doc-color-brand-primary);
+  --doc-icon-color: var(--doc-color-text-inverse);
+  max-width: 48px;
+  flex-grow: 0;
+}
+
+.doc-compare__carousel .doc-carousel__prev.swiper-button-disabled,
+.doc-compare__carousel .doc-carousel__next.swiper-button-disabled {
+  background-color: var(--doc-color-stroke-primary);
+  opacity: 1 !important;
+}
+
+.doc-compare__carousel > .doc-carousel > .doc-carousel__prev {
+  right: 48px;
+  left: auto;
+}
+
+.doc-compare__carousel > .doc-carousel > .doc-carousel__next {
+  right: 0;
+}
+
+/* Grid layout (Editor / File mode) */
+
+.doc-compare__grid {
+  display: grid;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+/* 1 column â€” always full width */
+.doc-compare__grid.doc-compare__grid--1 {
+  grid-template-columns: 1fr;
+}
+
+/* 2 columns â€” wraps to 1 when container is too narrow for 2 Ã— 310px */
+.doc-compare__grid.doc-compare__grid--2 {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 310px), 1fr));
+}
+
+/* 3+ columns â€” wraps naturally: 3 cols â†’ 2 cols â†’ 1 col as space shrinks */
+.doc-compare__grid.doc-compare__grid--3 {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 310px), 1fr));
+}
+
+.doc-compare__grid > * {
+  height: 100%;
+}
+
+.doc-compare__service-card {
+  padding: 20px;
+  border: 1px solid var(--doc-color-stroke-primary);
+  border-radius: 4px;
+  background-color: var(--doc-color-fill-light);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+/* TripArc.DocumentLayout.Modules\Trip\Comparisons\ComparisonServiceCard.razor.css */
+.doc-comparison-cost {
+  padding-block: 20px 16px;
+  margin-inline: 16px;
+  border-top: 1px solid var(--doc-color-stroke-primary);
+}
+
+/* TripArc.DocumentLayout.Modules\Trip\Comparisons\InfoComparisonCard.razor.css */
+
+.doc-comparison-info-images {
+    margin: -16px -16px 16px;
+}
+
+.doc-image.doc-comparison-info__img {
+    height: 184px;
+    --doc-img-height: 184px;
+    border-radius: 0;
+}
+
+
+/* LG: 75 rem */
+@media (min-width: 75rem) {
+    .doc-image.doc-comparison-info__img {
+        height: 300px;
+        --doc-img-height: 300px;
+    }
+}
+
+/* TripArc.DocumentLayout.Modules\Trip\FlightDetails\FlightCard.razor.css */
+.doc-flight-itinerary {
+  --doc-flight-itinerary-secondary-fg: var(--doc-color-text-secondary);
+  --doc-flight-itinerary-stroke: var(--doc-color-stroke-primary);
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.doc-flight-itinerary__body {
+  margin-top: 16px;
+}
+
+.doc-flight-itinerary__route {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-transform: uppercase;
+  line-height: 1;
+  gap: 8px;
+}
+
+.doc-flight-itinerary__layover {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 0;
+}
+
+.doc-flight-itinerary__layover-pill {
+  white-space: wrap;
+}
+
+.doc-flight-itinerary__layover-text {
+  font-weight: 700;
+}
+
+/* TripArc.DocumentLayout.Modules\Trip\FlightDetails\FlightRoute.razor.css */
+.doc-flight-itinerary__route-mid {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-transform: uppercase;
+  line-height: 1;
+  gap: 8px;
+}
+
+.doc-flight-itinerary__stop,
+.doc-flight-itinerary__route-icon {
+  color: var(--doc-flight-itinerary-secondary-fg);
+}
+
+.doc-flight-itinerary__route-icon {
+  display: inline-flex;
+  align-items: center;
+  width: 16px;
+  height: 16px;
+}
+
+.doc-flight-itinerary__route-icon i {
+  font-size: 16px;
+  width: inherit;
+  height: inherit;
+}
+
+/* TripArc.DocumentLayout.Modules\Trip\FlightDetails\FlightSegmentCard.razor.css */
+.doc-flight-segment {
+  --doc-flight-segment-bg: var(--doc-color-fill-light);
+  --doc-card-bg: var(--doc-flight-segment-bg);
+}
+
+.doc-flight-segment-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  padding: 12px;
+}
+
+.doc-flight-segment__meta,
+.doc-flight-segment__duration,
+.doc-flight-segment__detail,
+.doc-flight-segment__nodes,
+.doc-flight-segment__connector {
+  display: flex;
+  align-items: center;
+}
+
+.doc-flight-segment__label,
+.doc-flight-segment__city {
+  color: var(--doc-flight-itinerary-secondary-fg);
+}
+
+.doc-flight-segment__meta {
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.doc-flight-segment__meta-inner {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  flex: 1;
+  gap: 4px 12px;
+}
+
+.doc-flight-segment__duration {
+  flex-shrink: 0;
+}
+
+.doc-flight-segment__duration i {
+  margin-right: 4px;
+}
+
+.doc-flight-segment__label {
+  margin-right: 4px;
+}
+
+.doc-flight-segment__nodes {
+  flex-wrap: nowrap;
+  gap: 12px;
+}
+
+.doc-flight-segment__nodes > * {
+  flex: 1;
+}
+
+.doc-flight-segment__node {
+  flex: 0 1 auto;
+  text-align: center;
+}
+
+.doc-flight-segment__time {
+  white-space: nowrap;
+}
+
+.doc-flight-segment__station {
+  white-space: wrap;
+}
+
+.doc-flight-segment__city {
+  margin-top: 4px;
+}
+
+.doc-flight-segment__connector {
+  justify-content: center;
+  height: auto;
+  position: relative;
+  background-color: var(--doc-flight-segment-bg);
+}
+
+.doc-flight-segment__connector i {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  width: 44px;
+  height: 20px;
+  font-size: 20px;
+  padding: 0 12px;
+  background-color: inherit;
+}
+
+.doc-flight-segment__connector::before {
+  z-index: 1;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  width: 100%;
+  height: 1px;
+  content: "";
+  border-top: 2px solid transparent;
+  border-image: repeating-linear-gradient(to right, #ccc, #ccc 6px, transparent 6px, transparent 9px) 1;
+}
+
+.doc-flight-segment__specs {
+  border-top: 1px solid var(--doc-flight-itinerary-stroke);
+  padding-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px 40px;
+}
+
+.doc-flight-segment__station,
+.doc-flight-segment__city,
+.doc-flight-segment__value,
+.doc-flight-segment__time {
+  font-weight: 700;
+}
+
+/* LG: 75 rem */
+@media (min-width: 75rem) {
+  
+}
+
+/* TripArc.DocumentLayout.Modules\Trip\TimelineItems\ActivityServiceTimelineItem.razor.css */
+
+.activity-main-grid > * {
+    display: flex;
+    flex-direction: column;
+}
+
+.activity-image {
+    display: block;
+    width: 100%;
+    height: 224px;
+    object-fit: cover;
+}
+
+/* LG: 75rem */
+@media (min-width: 75rem) {
+    .activity-image {
+        min-height: 250px;
+        max-height: 697px;
+        flex-grow: 1;
+    }
+}
+
+/* TripArc.DocumentLayout.Modules\Trip\TimelineItems\InfoServiceTimelineItem.razor.css */
+.info-image {
+  display: block;
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+}
+
+/* LG: 75rem */
+@media (min-width: 75rem) {
+  .info-image {
+    height: 322px;
+  }
+}
+
+/* TripArc.DocumentLayout.Modules\Trip\TripAccommodationDetails.razor.css */
+.doc-accommodation__card {
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+}
+
+.doc-accommodation__card .doc-card__body {
+  width: 100%;
+  min-width: 0;
+}
+
+.doc-accommodation__body {
+  display: flex;
+  flex-direction: column;
+}
+
+.doc-accommodation__hero-image {
+  flex: 0 0 auto;
+  overflow: hidden;
+  position: relative;
+  height: 313px;
+}
+
+.doc-accommodation__hero-image .doc-card__media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.doc-accommodation__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-accommodation__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.doc-accommodation__links {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: auto;
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-accommodation__link {
+  display: inline-flex;
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-accommodation__link .doc-link-group {
+  display: flex;
+  overflow: hidden;
+}
+
+.doc-accommodation__link a {
+  display: inline-block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.doc-accommodation__details-trigger {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.doc-accommodation__links a {
+  white-space: nowrap;
+}
+
+/* SM: 37.5rem*/
+@media (min-width: 37.5rem) {
+  .doc-accommodation__actions {
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+}
+
+/* XL: 96rem*/
+@media (min-width: 96rem) {
+  .doc-accommodation__body {
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+
+  .doc-accommodation__hero-image {
+    width: 340px;
+    align-self: stretch;
+    height: auto;
+  }
+
+  .doc-accommodation__links {
+    justify-content: flex-start;
+  }
+
+  .doc-accommodation__link {
+    flex: 0 0 auto;
+  }
+}
+
+/* File render mode: always split regardless of viewport */
+.doc-accommodation__card--file .doc-accommodation__body {
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.doc-accommodation__card--file .doc-accommodation__hero-image {
+  width: 340px;
+  align-self: stretch;
+  height: auto;
+}
+
+.doc-accommodation__card--file .doc-accommodation__links {
+  justify-content: flex-start;
+}
+
+.doc-accommodation__card--file .doc-accommodation__link {
+  flex: 0 0 auto;
+}
+
+/* TripArc.DocumentLayout.Modules\Trip\TripContactInformation.razor.css */
+.doc-contact-card__body {
+    display: grid;
+    align-items: start;
+    gap: 8px;
+}
+
+/* XL: 96 rem */
+@media (min-width: 96rem) {
+    .doc-contact-card__body {
+        grid-template-columns: 501fr 252fr 171fr;
+    }
+}
+
+/* TripArc.DocumentLayout.Modules\Trip\TripDayByDayItinerary.razor.css */
+
+
+/* TripArc.DocumentLayout.Modules\Trip\TripDefaultCoverPage.razor.css */
+.doc-hero {
+  --doc-hero-fg: var(--doc-color-text-inverse);
+  --doc-hero-overlay-gradient: linear-gradient(180deg, rgba(28, 23, 30, 0.00) 0%, rgba(28, 23, 30, 0.58) 54.02%, #1C171E 100%);
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  min-height: var(--doc-hero-height, 447px);
+  color: var(--doc-hero-fg, inherit);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.doc-hero__header {
+  flex: 0 0 auto;
+  width: 100%;
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.doc-hero__brand-logo {
+  height: 23px;
+  width: auto;
+  background-repeat: no-repeat;
+  background-size: contain;
+  object-fit: contain;
+  margin-left: auto;
+}
+
+.doc-hero__main {
+  width: 100%;
+  flex: 1;
+  position: relative;
+  display: flex;
+  overflow: hidden;
+}
+
+.doc-hero__main::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--doc-hero-overlay-gradient);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.doc-hero__bg {
+  top: 0;
+  left: 0;
+  border-radius: unset;
+  position: absolute;
+  background-size: cover;
+  object-fit: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+.doc-hero__content {
+  position: relative;
+  z-index: 3;
+  color: inherit;
+  margin-top: auto;
+  flex: 1 1 auto;
+  max-width: 1856px;
+  margin-inline: auto;
+  padding: 48px 16px;
+}
+
+.doc-hero__meta {
+  margin-bottom: 16px;
+  font: var(--doc-type-text-body-1);
+  letter-spacing: var(--doc-type-text-body-1-ls);
+}
+
+.doc-hero__title {
+  font: var(--doc-type-display);
+  letter-spacing: var(--doc-type-display-ls);
+  text-transform: uppercase;
+}
+
+/* SM: 37.5rem */
+@media (min-width: 37.5rem) {
+  .doc-hero__content {
+    padding: 48px 32px;
+  }
+}
+
+/* MD: 56.25rem */
+@media (min-width: 56.25rem) {
+  .doc-hero__content {
+    padding: 48px 32px;
+  }
+}
+
+/* LG: 75rem */
+@media (min-width: 75rem) {
+  .doc-hero__content {
+    padding: 48px;
+  }
+}
+
+/* File hero variant */
+.doc-hero.doc-hero--file {
+  background: var(--doc-color-brand-primary);
+  padding: 28px;
+}
+
+.doc-hero.doc-hero--file .doc-hero__main {
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.doc-hero.doc-hero--file .doc-hero__content {
+  padding: 28px;
+}
+
+/* TripArc.DocumentLayout.Modules\Trip\TripDestinationGuideLink.razor.css */
+/* SM: 37.5rem */
+@media (min-width: 37.5rem) {
+  .doc-section-header {
+    display: none;
+  }
+}
+
+/* TripArc.DocumentLayout.Modules\Trip\TripFlightDetails.razor.css */
+
+
+/* TripArc.DocumentLayout.Modules\Trip\TripServiceComparisons.razor.css */
+.doc-copare-header {
+    margin-bottom: 40px;
+}
+
+.doc-compare-content + .doc-compare-content {
+    margin-top: 40px;
+}
+
+/* TripArc.DocumentLayout.Modules\Trip\TripSummary.razor.css */
+.doc-itinerary-glance {
+    --doc-itinerary-glance-stroke: var(--doc-color-stroke-primary);
+    --doc-itinerary-glance-bg: var(--doc-color-fill-light);
+    --doc-itinerary-glance-highlight-bg: var(--doc-color-fill-mid);
+    --doc-itinerary-glance-highlight-fg: var(--doc-color-text-secondary);
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--doc-itinerary-glance-stroke);
+    background-color: var(--doc-itinerary-glance-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    font-weight: 700;
+}
+
+.doc-itinerary-glance__day {
+    display: grid;
+}
+
+    .doc-itinerary-glance__day + .doc-itinerary-glance__day {
+        border-top: 1px solid;
+        border-color: inherit;
+    }
+
+.doc-itinerary-glance__date-side,
+.doc-itinerary-glance__events {
+    padding: 16px;
+}
+
+.doc-itinerary-glance__date-side {
+    background-color: var(--doc-itinerary-glance-highlight-bg);
+    display: grid;
+    justify-items: start;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 8px;
+}
+
+.doc-itinerary-glance__date-text {
+    text-transform: uppercase;
+    color: var(--doc-itinerary-glance-highlight-fg);
+}
+
+.doc-itinerary-glance__events {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.doc-itinerary-glance__event {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr;
+    gap: 12px;
+}
+
+/* LG: 75 rem */
+@media (min-width: 75rem) {
+    .doc-itinerary-glance__day {
+        grid-template-columns: 266px 1fr;
+    }
+
+    .doc-itinerary-glance__date-side {
+        grid-template-columns: 1fr;
+        align-content: start;
+    }
+}
+
+/* TripArc.DocumentLayout.Modules\Trip\TripTermsAndConditions.razor.css */
+.doc-terms-content p + p {
+    margin-top: 16px;
+}
+
+/* TripArc.DocumentLayout.Modules\Trip\TripTravelerInformation.razor.css */
+.doc-travelers {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: var(--traveler-cols, 1fr);
+}
+
+.doc-travelers .doc-traveler {
+  height: 100%;
+}
+
+.doc-travelers .doc-card__title {
+  margin-bottom: 4px;
+}
+
+.doc-travelers .doc-card__body,
+.doc-traveler__main {
+  display: grid;
+  align-content: start;
+  gap: 24px;
+}
+
+.doc-traveler__contact {
+  display: grid;
+  gap: 8px;
+}
+
+.doc-field__text {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 0 4px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.doc-traveler__details {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: var(--traveler-details-cols, repeat(2, 1fr));
+}
+
+.traveler-count-1 .doc-traveler__details {
+  --traveler-details-cols: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+/* LG: 1140px */
+@media (min-width: 1140px) {
+  .doc-travelers {
+    --traveler-cols: repeat(2, 1fr);
+  }
+
+  .doc-travelers.traveler-count-1 {
+    --traveler-cols: 1fr;
+  }
+}
+
+/* XL: 1440px */
+@media (min-width: 1440px) {
+  .doc-travelers.traveler-count-3 {
+    --traveler-cols: repeat(3, 1fr);
+  }
+}
+
