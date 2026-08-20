@@ -102,12 +102,12 @@ body {
 .doc-section-header,
 .svc-image-grid,
 i.ph,
-.doc-timeline__header {
+.doc-timeline__header,
+.doc-panel__header {
   break-inside: avoid;
   page-break-inside: avoid;
 }
 
-.doc-panel__header,
 .doc-timeline__header,
 .doc-field__label {
   break-after: avoid;
@@ -119,6 +119,16 @@ i.ph,
 }
 .doc-field > * + * {
   margin-top: 4px;
+}
+
+.doc-section-header {
+  display: block;
+}
+.doc-section-header > .doc-icon-badge {
+  float: left;
+}
+.doc-section-header__text {
+  overflow: hidden;
 }
 
 .doc-card__body .doc-field__label {
