@@ -86,6 +86,15 @@ body {
 .doc-panel {
   border-radius: 5px;
   box-shadow: 0 2.147px 3.221px -0.537px rgba(9, 10, 11, 0.1), 0 1.074px 2.147px -1.074px rgba(9, 10, 11, 0.1);
+  display: block;
+}
+
+.doc-section-header {
+  display: block;
+  overflow: auto;
+}
+.doc-section-header > .doc-icon-badge {
+  float: left;
 }
 
 .doc-avatar,
@@ -119,16 +128,6 @@ i.ph,
 }
 .doc-field > * + * {
   margin-top: 4px;
-}
-
-.doc-section-header {
-  display: block;
-}
-.doc-section-header > .doc-icon-badge {
-  float: left;
-}
-.doc-section-header__text {
-  overflow: hidden;
 }
 
 .doc-card__body .doc-field__label {
