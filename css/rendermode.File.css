@@ -89,14 +89,6 @@ body {
   display: block;
 }
 
-.doc-section-header {
-  display: block;
-  overflow: auto;
-}
-.doc-section-header > .doc-icon-badge {
-  float: left;
-}
-
 .doc-avatar,
 .doc-badge,
 .doc-badge-pill,
