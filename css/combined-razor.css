@@ -1152,13 +1152,6 @@ main {
   padding: 28px;
 }
 
-/* TripArc.DocumentLayout.Modules\Trip\TripDestinationGuideLink.razor.css */
-/* SM: 37.5rem */
-@media (min-width: 37.5rem) {
-  .doc-section-header {
-    display: none;
-  }
-}
 
 /* TripArc.DocumentLayout.Modules\Trip\TripFlightDetails.razor.css */
 
