@@ -1303,3 +1303,6 @@ main {
   }
 }
 
+.doc-compare-card__header {
+    margin: -16px -16px 16px;
+}
